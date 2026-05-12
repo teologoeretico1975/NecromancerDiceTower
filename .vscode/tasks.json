@@ -2,25 +2,57 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Export technical SVG to PDF",
+      "label": "Export Sheet 01 SVG to PDF",
       "type": "shell",
-      "command": "C:\\Program Files\\Inkscape\\bin\\inkscape.exe",
+      "command": "inkscape",
       "args": [
-        "01_Technical_Template/svg/necromancer_dice_tower_technical_template_v001.svg",
+        "01_Technical_Template/svg/necromancer_dice_tower_sheet_01_body_a_v001.svg",
         "--export-type=pdf",
-        "--export-filename=01_Technical_Template/pdf/necromancer_dice_tower_technical_template_v001.pdf"
+        "--export-filename=01_Technical_Template/pdf/necromancer_dice_tower_sheet_01_body_a_v001.pdf"
       ],
       "problemMatcher": []
     },
     {
-      "label": "Export technical SVG to PNG preview",
+      "label": "Export Sheet 02 SVG to PDF",
       "type": "shell",
-      "command": "C:\\Program Files\\Inkscape\\bin\\inkscape.exe",
+      "command": "inkscape",
       "args": [
-        "01_Technical_Template/svg/necromancer_dice_tower_technical_template_v001.svg",
-        "--export-type=png",
-        "--export-filename=01_Technical_Template/exports_png/necromancer_dice_tower_technical_template_v001.png",
-        "--export-dpi=150"
+        "01_Technical_Template/svg/necromancer_dice_tower_sheet_02_body_b_v001.svg",
+        "--export-type=pdf",
+        "--export-filename=01_Technical_Template/pdf/necromancer_dice_tower_sheet_02_body_b_v001.pdf"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Export Sheet 03 SVG to PDF",
+      "type": "shell",
+      "command": "inkscape",
+      "args": [
+        "01_Technical_Template/svg/necromancer_dice_tower_sheet_03_ramps_v001.svg",
+        "--export-type=pdf",
+        "--export-filename=01_Technical_Template/pdf/necromancer_dice_tower_sheet_03_ramps_v001.pdf"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Export Sheet 04 SVG to PDF",
+      "type": "shell",
+      "command": "inkscape",
+      "args": [
+        "01_Technical_Template/svg/necromancer_dice_tower_sheet_04_base_tray_v001.svg",
+        "--export-type=pdf",
+        "--export-filename=01_Technical_Template/pdf/necromancer_dice_tower_sheet_04_base_tray_v001.pdf"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Export All Technical SVGs to PDF",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Export Sheet 01 SVG to PDF",
+        "Export Sheet 02 SVG to PDF",
+        "Export Sheet 03 SVG to PDF",
+        "Export Sheet 04 SVG to PDF"
       ],
       "problemMatcher": []
     }

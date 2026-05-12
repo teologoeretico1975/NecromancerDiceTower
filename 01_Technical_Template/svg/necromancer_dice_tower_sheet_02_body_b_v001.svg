@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="210mm" height="297mm" viewBox="0 0 210 297">
+  <title>Necromancer Dice Tower - Sheet 02 Body Part B v001</title>
+  <defs>
+    <style>
+      .cut { fill: none; stroke: #000000; stroke-width: 0.35; }
+      .fold-valley { fill: none; stroke: #0066cc; stroke-width: 0.35; stroke-dasharray: 3 2; }
+      .fold-mountain { fill: none; stroke: #cc0000; stroke-width: 0.35; stroke-dasharray: 1 2; }
+      .guide { fill: none; stroke: #999999; stroke-width: 0.25; stroke-dasharray: 2 2; }
+      .glue { fill: #eeeeee; stroke: #000000; stroke-width: 0.35; }
+      .label { font-family: Arial, sans-serif; font-size: 4px; fill: #000000; }
+      .small { font-family: Arial, sans-serif; font-size: 3px; fill: #000000; }
+      .tiny { font-family: Arial, sans-serif; font-size: 2.6px; fill: #000000; }
+      .title { font-family: Arial, sans-serif; font-size: 4.5px; font-weight: bold; fill: #000000; }
+    </style>
+  </defs>
+  <rect x="10" y="10" width="190" height="277" class="guide"/>
+  <text x="10" y="7" class="title">Necromancer Dice Tower - Sheet 02 Body Part B v001</text>
+
+  <rect x="30" y="35" width="10" height="190" class="glue"/>
+  <rect x="40" y="35" width="65" height="190" class="cut"/>
+  <rect x="105" y="35" width="65" height="190" class="cut"/>
+  <rect x="170" y="35" width="10" height="190" class="glue"/>
+  <line x1="40" y1="35" x2="40" y2="225" class="fold-valley"/>
+  <line x1="105" y1="35" x2="105" y2="225" class="fold-valley"/>
+  <line x1="170" y1="35" x2="170" y2="225" class="fold-valley"/>
+  <text x="32" y="130" class="tiny" transform="rotate(90 32 130)">GLUE</text>
+  <text x="65" y="130" class="label">BACK</text>
+  <text x="123" y="130" class="label">RIGHT SIDE</text>
+  <text x="172" y="130" class="tiny" transform="rotate(90 172 130)">GLUE</text>
+  <line x1="111" y1="80" x2="164" y2="80" class="fold-valley"/>
+  <text x="113" y="78" class="tiny">Ramp A guide</text>
+  <line x1="111" y1="130" x2="164" y2="130" class="fold-valley"/>
+  <text x="113" y="128" class="tiny">Ramp B guide</text>
+  <line x1="111" y1="180" x2="164" y2="180" class="fold-valley"/>
+  <text x="113" y="178" class="tiny">Ramp C guide</text>
+
+  <rect x="10" y="262" width="20" height="20" class="cut"/>
+  <text x="35" y="274" class="small">Scale check: 20 x 20 mm</text>
+
+  <text x="120" y="250" class="label">Legend</text>
+  <line x1="120" y1="258" x2="145" y2="258" class="cut"/>
+  <text x="150" y="259" class="small">Cut</text>
+  <line x1="120" y1="265" x2="145" y2="265" class="fold-valley"/>
+  <text x="150" y="266" class="small">Valley fold</text>
+  <line x1="120" y1="272" x2="145" y2="272" class="fold-mountain"/>
+  <text x="150" y="273" class="small">Mountain fold</text>
+  <rect x="120" y="278" width="25" height="5" class="glue"/>
+  <text x="150" y="282" class="small">Glue tab</text>
+</svg>

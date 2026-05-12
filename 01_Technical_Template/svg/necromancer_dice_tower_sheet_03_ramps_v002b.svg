@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="210mm" height="297mm" viewBox="0 0 210 297">
+  <title>Necromancer Dice Tower - Sheet 03 Internal Ramps v002b</title>
+  <defs>
+    <style>
+      .cut { fill: none; stroke: #000000; stroke-width: 0.35; }
+      .fold-valley { fill: none; stroke: #0066cc; stroke-width: 0.35; stroke-dasharray: 3 2; }
+      .fold-mountain { fill: none; stroke: #cc0000; stroke-width: 0.35; stroke-dasharray: 1 2; }
+      .guide { fill: none; stroke: #999999; stroke-width: 0.25; stroke-dasharray: 2 2; }
+      .glue { fill: #eeeeee; stroke: #000000; stroke-width: 0.35; }
+      .label { font-family: Arial, sans-serif; font-size: 4px; fill: #000000; }
+      .small { font-family: Arial, sans-serif; font-size: 3.2px; fill: #000000; }
+      .tiny { font-family: Arial, sans-serif; font-size: 3px; fill: #000000; }
+      .title { font-family: Arial, sans-serif; font-size: 4.5px; font-weight: bold; fill: #000000; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="210" height="297" fill="#ffffff"/>
+  <rect x="10" y="10" width="190" height="277" class="guide"/>
+  <text x="10" y="7" class="title">Necromancer Dice Tower - Sheet 03 Internal Ramps v002b</text>
+
+  <!-- RAMP A: high left, low right -->
+  <rect x="43" y="38" width="58" height="84" class="cut"/>
+  <rect x="38" y="38" width="5" height="84" class="cut"/>
+  <rect x="101" y="38" width="5" height="84" class="cut"/>
+  <rect x="30" y="38" width="8" height="84" class="glue"/>
+  <rect x="106" y="38" width="8" height="84" class="glue"/>
+  <rect x="43" y="30" width="58" height="8" class="glue"/>
+  <line x1="43" y1="38" x2="43" y2="122" class="fold-valley"/>
+  <line x1="101" y1="38" x2="101" y2="122" class="fold-valley"/>
+  <line x1="38" y1="38" x2="38" y2="122" class="fold-valley"/>
+  <line x1="106" y1="38" x2="106" y2="122" class="fold-valley"/>
+  <line x1="43" y1="45" x2="101" y2="45" class="fold-valley"/>
+  <line x1="43" y1="52" x2="101" y2="52" class="fold-mountain"/>
+  <line x1="43" y1="59" x2="101" y2="59" class="fold-valley"/>
+  <line x1="43" y1="66" x2="101" y2="66" class="fold-mountain"/>
+  <line x1="43" y1="73" x2="101" y2="73" class="fold-valley"/>
+  <line x1="43" y1="80" x2="101" y2="80" class="fold-mountain"/>
+  <line x1="43" y1="87" x2="101" y2="87" class="fold-valley"/>
+  <line x1="43" y1="94" x2="101" y2="94" class="fold-mountain"/>
+  <line x1="43" y1="101" x2="101" y2="101" class="fold-valley"/>
+  <line x1="43" y1="108" x2="101" y2="108" class="fold-mountain"/>
+  <line x1="43" y1="115" x2="101" y2="115" class="fold-valley"/>
+  <text x="62" y="74" class="label">RAMP A</text>
+  <text x="32" y="80" class="tiny" transform="rotate(90 32 80)">GLUE TO WALL</text>
+  <text x="108" y="80" class="tiny" transform="rotate(90 108 80)">GLUE TO WALL</text>
+  <text x="50" y="35" class="tiny">BACK TAB</text>
+  <text x="44" y="126" class="tiny">HIGH SIDE</text>
+  <text x="84" y="126" class="tiny">LOW SIDE</text>
+  <text x="60" y="132" class="tiny">FLOW -></text>
+
+  <!-- RAMP B: high right, low left -->
+  <rect x="128" y="38" width="58" height="84" class="cut"/>
+  <rect x="123" y="38" width="5" height="84" class="cut"/>
+  <rect x="186" y="38" width="5" height="84" class="cut"/>
+  <rect x="115" y="38" width="8" height="84" class="glue"/>
+  <rect x="191" y="38" width="8" height="84" class="glue"/>
+  <rect x="128" y="30" width="58" height="8" class="glue"/>
+  <line x1="128" y1="38" x2="128" y2="122" class="fold-valley"/>
+  <line x1="186" y1="38" x2="186" y2="122" class="fold-valley"/>
+  <line x1="123" y1="38" x2="123" y2="122" class="fold-valley"/>
+  <line x1="191" y1="38" x2="191" y2="122" class="fold-valley"/>
+  <line x1="128" y1="45" x2="186" y2="45" class="fold-valley"/>
+  <line x1="128" y1="52" x2="186" y2="52" class="fold-mountain"/>
+  <line x1="128" y1="59" x2="186" y2="59" class="fold-valley"/>
+  <line x1="128" y1="66" x2="186" y2="66" class="fold-mountain"/>
+  <line x1="128" y1="73" x2="186" y2="73" class="fold-valley"/>
+  <line x1="128" y1="80" x2="186" y2="80" class="fold-mountain"/>
+  <line x1="128" y1="87" x2="186" y2="87" class="fold-valley"/>
+  <line x1="128" y1="94" x2="186" y2="94" class="fold-mountain"/>
+  <line x1="128" y1="101" x2="186" y2="101" class="fold-valley"/>
+  <line x1="128" y1="108" x2="186" y2="108" class="fold-mountain"/>
+  <line x1="128" y1="115" x2="186" y2="115" class="fold-valley"/>
+  <text x="147" y="74" class="label">RAMP B</text>
+  <text x="117" y="80" class="tiny" transform="rotate(90 117 80)">GLUE TO WALL</text>
+  <text x="193" y="80" class="tiny" transform="rotate(90 193 80)">GLUE TO WALL</text>
+  <text x="136" y="35" class="tiny">BACK TAB</text>
+  <text x="129" y="126" class="tiny">LOW SIDE</text>
+  <text x="169" y="126" class="tiny">HIGH SIDE</text>
+  <text x="145" y="132" class="tiny">FLOW -></text>
+
+  <!-- RAMP C: high left, low right -->
+  <rect x="43" y="148" width="58" height="84" class="cut"/>
+  <rect x="38" y="148" width="5" height="84" class="cut"/>
+  <rect x="101" y="148" width="5" height="84" class="cut"/>
+  <rect x="30" y="148" width="8" height="84" class="glue"/>
+  <rect x="106" y="148" width="8" height="84" class="glue"/>
+  <rect x="43" y="140" width="58" height="8" class="glue"/>
+  <line x1="43" y1="148" x2="43" y2="232" class="fold-valley"/>
+  <line x1="101" y1="148" x2="101" y2="232" class="fold-valley"/>
+  <line x1="38" y1="148" x2="38" y2="232" class="fold-valley"/>
+  <line x1="106" y1="148" x2="106" y2="232" class="fold-valley"/>
+  <line x1="43" y1="155" x2="101" y2="155" class="fold-valley"/>
+  <line x1="43" y1="162" x2="101" y2="162" class="fold-mountain"/>
+  <line x1="43" y1="169" x2="101" y2="169" class="fold-valley"/>
+  <line x1="43" y1="176" x2="101" y2="176" class="fold-mountain"/>
+  <line x1="43" y1="183" x2="101" y2="183" class="fold-valley"/>
+  <line x1="43" y1="190" x2="101" y2="190" class="fold-mountain"/>
+  <line x1="43" y1="197" x2="101" y2="197" class="fold-valley"/>
+  <line x1="43" y1="204" x2="101" y2="204" class="fold-mountain"/>
+  <line x1="43" y1="211" x2="101" y2="211" class="fold-valley"/>
+  <line x1="43" y1="218" x2="101" y2="218" class="fold-mountain"/>
+  <line x1="43" y1="225" x2="101" y2="225" class="fold-valley"/>
+  <text x="62" y="184" class="label">RAMP C</text>
+  <text x="32" y="190" class="tiny" transform="rotate(90 32 190)">GLUE TO WALL</text>
+  <text x="108" y="190" class="tiny" transform="rotate(90 108 190)">GLUE TO WALL</text>
+  <text x="50" y="145" class="tiny">BACK TAB</text>
+  <text x="44" y="236" class="tiny">HIGH SIDE</text>
+  <text x="84" y="236" class="tiny">LOW SIDE</text>
+  <text x="60" y="242" class="tiny">FLOW -></text>
+
+  <text x="35" y="244" class="small">Corrugated ramp profile</text>
+  <text x="35" y="250" class="small">Pitch 7 mm</text>
+  <text x="35" y="256" class="small">Alternating valley/mountain folds</text>
+  <text x="35" y="262" class="small">Default: 58 mm path, 5 mm walls, 8 mm tabs</text>
+
+  <rect x="10" y="262" width="20" height="20" class="cut"/>
+  <text x="35" y="274" class="small">Scale check: 20 x 20 mm</text>
+
+  <text x="120" y="250" class="label">Legend</text>
+  <line x1="120" y1="258" x2="145" y2="258" class="cut"/>
+  <text x="150" y="259" class="small">Cut</text>
+  <line x1="120" y1="265" x2="145" y2="265" class="fold-valley"/>
+  <text x="150" y="266" class="small">Valley fold</text>
+  <line x1="120" y1="272" x2="145" y2="272" class="fold-mountain"/>
+  <text x="150" y="273" class="small">Mountain fold</text>
+  <rect x="120" y="278" width="25" height="5" class="glue"/>
+  <text x="150" y="282" class="small">Glue tab</text>
+</svg>

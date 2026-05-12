@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="210mm" height="297mm" viewBox="0 0 210 297">
+  <title>Necromancer Dice Tower - Sheet 04 Base Tray v001</title>
+  <defs>
+    <style>
+      .cut { fill: none; stroke: #000000; stroke-width: 0.35; }
+      .fold-valley { fill: none; stroke: #0066cc; stroke-width: 0.35; stroke-dasharray: 3 2; }
+      .fold-mountain { fill: none; stroke: #cc0000; stroke-width: 0.35; stroke-dasharray: 1 2; }
+      .guide { fill: none; stroke: #999999; stroke-width: 0.25; stroke-dasharray: 2 2; }
+      .glue { fill: #eeeeee; stroke: #000000; stroke-width: 0.35; }
+      .label { font-family: Arial, sans-serif; font-size: 4px; fill: #000000; }
+      .small { font-family: Arial, sans-serif; font-size: 3px; fill: #000000; }
+      .tiny { font-family: Arial, sans-serif; font-size: 2.6px; fill: #000000; }
+      .title { font-family: Arial, sans-serif; font-size: 4.5px; font-weight: bold; fill: #000000; }
+    </style>
+  </defs>
+  <rect x="10" y="10" width="190" height="277" class="guide"/>
+  <text x="10" y="7" class="title">Necromancer Dice Tower - Sheet 04 Base Tray v001</text>
+
+  <rect x="55" y="95" width="95" height="90" class="cut"/>
+  <text x="88" y="142" class="label">TRAY FLOOR</text>
+  <rect x="55" y="185" width="95" height="25" class="cut"/>
+  <line x1="55" y1="185" x2="150" y2="185" class="fold-valley"/>
+  <text x="87" y="200" class="small">FRONT WALL</text>
+  <rect x="70" y="75" width="65" height="20" class="glue"/>
+  <line x1="70" y1="95" x2="135" y2="95" class="fold-valley"/>
+  <text x="78" y="87" class="tiny">GLUE TOWER HERE</text>
+  <rect x="30" y="95" width="25" height="90" class="cut"/>
+  <line x1="55" y1="95" x2="55" y2="185" class="fold-valley"/>
+  <text x="38" y="142" class="small" transform="rotate(90 38 142)">LEFT WALL</text>
+  <rect x="150" y="95" width="25" height="90" class="cut"/>
+  <line x1="150" y1="95" x2="150" y2="185" class="fold-valley"/>
+  <text x="158" y="142" class="small" transform="rotate(90 158 142)">RIGHT WALL</text>
+  <rect x="30" y="185" width="25" height="10" class="glue"/>
+  <rect x="150" y="185" width="25" height="10" class="glue"/>
+  <text x="37" y="191" class="tiny">GLUE</text>
+  <text x="155" y="191" class="tiny">GLUE</text>
+  <text x="20" y="45" class="small">Base tray v001: simple rectangular catcher tray.</text>
+  <text x="20" y="51" class="small">Attach tower front exit toward the tray floor.</text>
+
+  <rect x="10" y="262" width="20" height="20" class="cut"/>
+  <text x="35" y="274" class="small">Scale check: 20 x 20 mm</text>
+
+  <text x="120" y="250" class="label">Legend</text>
+  <line x1="120" y1="258" x2="145" y2="258" class="cut"/>
+  <text x="150" y="259" class="small">Cut</text>
+  <line x1="120" y1="265" x2="145" y2="265" class="fold-valley"/>
+  <text x="150" y="266" class="small">Valley fold</text>
+  <line x1="120" y1="272" x2="145" y2="272" class="fold-mountain"/>
+  <text x="150" y="273" class="small">Mountain fold</text>
+  <rect x="120" y="278" width="25" height="5" class="glue"/>
+  <text x="150" y="282" class="small">Glue tab</text>
+</svg>

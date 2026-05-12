@@ -4,7 +4,21 @@ Digital printable papercraft product for Etsy.
 
 ## Current Phase
 
-Technical Template v1.
+Technical Template v2b (readability-tuned).
+
+## Current Progress
+
+- v001 baseline technical sheets created (body A, body B, ramps, base tray).
+- v002 ramp system introduced with anchor-based placement guides on body sheets.
+- v002 ramp sheet regenerated with corrugated fold profile for improved d4/d6 behavior.
+- v002b readability pass completed (larger tiny/small text and cleaned annotation placement).
+- PDF and PNG exports generated for v001, v002, and v002b review.
+
+## Next Steps
+
+1. Print v002b at 100% and run build test v002.
+2. Validate jam rate and direction-change targets from the v002 test sheet.
+3. Apply geometry refinements for v003 if hotspots are found.
 
 ## Source of Truth
 
