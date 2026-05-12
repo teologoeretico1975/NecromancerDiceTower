@@ -1,0 +1,28 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Export technical SVG to PDF",
+      "type": "shell",
+      "command": "C:\\Program Files\\Inkscape\\bin\\inkscape.exe",
+      "args": [
+        "01_Technical_Template/svg/necromancer_dice_tower_technical_template_v001.svg",
+        "--export-type=pdf",
+        "--export-filename=01_Technical_Template/pdf/necromancer_dice_tower_technical_template_v001.pdf"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Export technical SVG to PNG preview",
+      "type": "shell",
+      "command": "C:\\Program Files\\Inkscape\\bin\\inkscape.exe",
+      "args": [
+        "01_Technical_Template/svg/necromancer_dice_tower_technical_template_v001.svg",
+        "--export-type=png",
+        "--export-filename=01_Technical_Template/exports_png/necromancer_dice_tower_technical_template_v001.png",
+        "--export-dpi=150"
+      ],
+      "problemMatcher": []
+    }
+  ]
+}
