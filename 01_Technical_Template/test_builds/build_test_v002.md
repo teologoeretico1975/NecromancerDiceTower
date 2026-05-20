@@ -11,7 +11,45 @@ Necromancer Dice Tower - Technical Template v002 (Stepped/Accordion Ramps)
 - Fit to page: disabled
 - Paper/cardstock used:
 - Printer:
-- Date:
+- Date: 2026-05-20
+
+---
+
+## Automated SVG Preflight (Agent 03)
+
+Script used:
+
+```text
+01_Technical_Template/test_builds/agent_03_svg_build_test.py
+```
+
+Execution command:
+
+```text
+/workspaces/NecromancerDiceTower/.venv/bin/python 01_Technical_Template/test_builds/agent_03_svg_build_test.py
+```
+
+Execution result:
+
+- sheet_01_body_a.svg: PASS
+- sheet_02_body_b.svg: PASS
+- sheet_03_ramps_ab.svg: PASS
+- sheet_04_ramp_c.svg: PASS
+- sheet_05_base_tray.svg: PASS
+- OVERALL: PASS
+
+Checks covered by Agent 03:
+
+- A4 root size and viewBox (210mm x 297mm, 0 0 210 297)
+- Legend and 20 x 20 mm scale text
+- Line conventions present (black cut, blue dashed valley, red dotted mountain)
+- Glue tab fill present (#e6e6e6)
+- v002 anchors on Sheet 01/02 (A-L, A-R, B-L, B-R, C-L, C-R)
+- v002 ramp labels on Sheet 03/04 (HIGH SIDE, LOW SIDE, GLUE TO WALL, FLOW ->)
+
+Limitations:
+
+- This preflight does not replace physical print/build/dice-roll tests.
 
 ---
 

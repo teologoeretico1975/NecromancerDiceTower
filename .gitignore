@@ -13,6 +13,15 @@ Thumbs.db
 *.tmp
 *.bak
 
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+
+# Python local artifacts
+__pycache__/
+*.pyc
+
 # Heavy generated raw images - optional
 03_Assets/ai_generated_raw/temp/
 03_Assets/ai_generated_raw/_discarded/

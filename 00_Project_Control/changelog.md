@@ -1,5 +1,32 @@
 # Changelog
 
+## 2026-05-20
+
+### Added
+
+- Persistent SVG generator script with merged-spec support: [agent_02b_svg_generator.py](agent_02b_svg_generator.py).
+- Persistent automated build preflight script: [01_Technical_Template/test_builds/agent_03_svg_build_test.py](01_Technical_Template/test_builds/agent_03_svg_build_test.py).
+- Dev container configuration: [.devcontainer/devcontainer.json](.devcontainer/devcontainer.json).
+
+### Updated
+
+- Sheet 3 validation and A4 fit math in [01_Technical_Template/specs/technical_spec_v001.md](01_Technical_Template/specs/technical_spec_v001.md).
+- Build test report updated with automated preflight outcomes in [01_Technical_Template/test_builds/build_test_v002.md](01_Technical_Template/test_builds/build_test_v002.md).
+- SVG generator now loads all `technical_spec_v*.md` files and applies latest ramp overrides.
+
+### Generated
+
+- New technical sheets produced by Agent 02b:
+	- [01_Technical_Template/svg/sheet_01_body_a.svg](01_Technical_Template/svg/sheet_01_body_a.svg)
+	- [01_Technical_Template/svg/sheet_02_body_b.svg](01_Technical_Template/svg/sheet_02_body_b.svg)
+	- [01_Technical_Template/svg/sheet_03_ramps_ab.svg](01_Technical_Template/svg/sheet_03_ramps_ab.svg)
+	- [01_Technical_Template/svg/sheet_04_ramp_c.svg](01_Technical_Template/svg/sheet_04_ramp_c.svg)
+	- [01_Technical_Template/svg/sheet_05_base_tray.svg](01_Technical_Template/svg/sheet_05_base_tray.svg)
+
+### Removed
+
+- Legacy versioned SVG/PDF/PNG exports cleaned during workspace reset and replaced by new sheet-based outputs.
+
 ## 2026-05-12
 
 ### Added
