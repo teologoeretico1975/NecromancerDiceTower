@@ -6,9 +6,9 @@
       "type": "shell",
       "command": "inkscape",
       "args": [
-        "01_Technical_Template/svg/necromancer_dice_tower_sheet_01_body_a_v001.svg",
+        "01_Technical_Template/svg/sheet_01_body_a.svg",
         "--export-type=pdf",
-        "--export-filename=01_Technical_Template/pdf/necromancer_dice_tower_sheet_01_body_a_v001.pdf"
+        "--export-filename=01_Technical_Template/pdf/sheet_01_body_a.pdf"
       ],
       "problemMatcher": []
     },
@@ -17,9 +17,9 @@
       "type": "shell",
       "command": "inkscape",
       "args": [
-        "01_Technical_Template/svg/necromancer_dice_tower_sheet_02_body_b_v001.svg",
+        "01_Technical_Template/svg/sheet_02_body_b.svg",
         "--export-type=pdf",
-        "--export-filename=01_Technical_Template/pdf/necromancer_dice_tower_sheet_02_body_b_v001.pdf"
+        "--export-filename=01_Technical_Template/pdf/sheet_02_body_b.pdf"
       ],
       "problemMatcher": []
     },
@@ -28,9 +28,9 @@
       "type": "shell",
       "command": "inkscape",
       "args": [
-        "01_Technical_Template/svg/necromancer_dice_tower_sheet_03_ramps_v001.svg",
+        "01_Technical_Template/svg/sheet_03_ramps_ab.svg",
         "--export-type=pdf",
-        "--export-filename=01_Technical_Template/pdf/necromancer_dice_tower_sheet_03_ramps_v001.pdf"
+        "--export-filename=01_Technical_Template/pdf/sheet_03_ramps_ab.pdf"
       ],
       "problemMatcher": []
     },
@@ -39,9 +39,20 @@
       "type": "shell",
       "command": "inkscape",
       "args": [
-        "01_Technical_Template/svg/necromancer_dice_tower_sheet_04_base_tray_v001.svg",
+        "01_Technical_Template/svg/sheet_04_ramp_c.svg",
         "--export-type=pdf",
-        "--export-filename=01_Technical_Template/pdf/necromancer_dice_tower_sheet_04_base_tray_v001.pdf"
+        "--export-filename=01_Technical_Template/pdf/sheet_04_ramp_c.pdf"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Export Sheet 05 SVG to PDF",
+      "type": "shell",
+      "command": "inkscape",
+      "args": [
+        "01_Technical_Template/svg/sheet_05_base_tray.svg",
+        "--export-type=pdf",
+        "--export-filename=01_Technical_Template/pdf/sheet_05_base_tray.pdf"
       ],
       "problemMatcher": []
     },
@@ -52,7 +63,8 @@
         "Export Sheet 01 SVG to PDF",
         "Export Sheet 02 SVG to PDF",
         "Export Sheet 03 SVG to PDF",
-        "Export Sheet 04 SVG to PDF"
+        "Export Sheet 04 SVG to PDF",
+        "Export Sheet 05 SVG to PDF"
       ],
       "problemMatcher": []
     }

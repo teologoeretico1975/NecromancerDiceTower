@@ -1,6 +1,26 @@
 # Changelog
 
-## 2026-05-20
+## 2026-05-20 (Session 2)
+
+### Updated
+
+- Dev container now includes Inkscape auto-install in `postCreateCommand` for persistent PDF export capability.
+- VS Code tasks fully aligned to current sheet-based SVG workflow (`sheet_01..sheet_05`).
+- PDF export task count increased from 4 to 5 sheets (added `sheet_05_base_tray`).
+
+### Fixed
+
+- Resolved JSON schema validation error in `.devcontainer/devcontainer.json` and `.vscode/settings.json` (invalid `workbench.editorAssociations` value).
+- PDF viewer extension pinned via:
+  - `tomoki1207.pdf` in devcontainer extensions list.
+  - `.vscode/extensions.json` with workspace recommendations.
+- This prevents viewer loss across reload/rebuild cycles.
+
+### Generated
+
+- PDF exports of all 5 current sheets (11.4–12 KB each) saved to `01_Technical_Template/pdf/`.
+
+## 2026-05-20 (Session 1)
 
 ### Added
 

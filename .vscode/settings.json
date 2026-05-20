@@ -5,6 +5,9 @@
   "editor.rulers": [100],
   "markdown.preview.breaks": true,
   "markdown.preview.fontSize": 15,
+  "workbench.editorAssociations": {
+    "*.pdf": "default"
+  },
   "explorer.compactFolders": false,
   "files.exclude": {
     "**/.git": true,
