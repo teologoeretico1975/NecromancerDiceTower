@@ -4,21 +4,21 @@ Digital printable papercraft product for Etsy.
 
 ## Current Phase
 
-Technical Template v2b (readability-tuned).
+Technical Template v1 review.
 
 ## Current Progress
 
-- v001 baseline technical sheets created (body A, body B, ramps, base tray).
-- v002 ramp system introduced with anchor-based placement guides on body sheets.
-- v002 ramp sheet regenerated with corrugated fold profile for improved d4/d6 behavior.
-- v002b readability pass completed (larger tiny/small text and cleaned annotation placement).
-- PDF and PNG exports generated for v001, v002, and v002b review.
+- Created `agent_02_technical_engineer.py` to generate `01_Technical_Template/specs/technical_spec_v001.md` from project state.
+- Added `.devcontainer/devcontainer.json` for Python 3.11, required VS Code extensions, package install, and secret mapping.
+- Completed a third review of `01_Technical_Template/specs/technical_spec_v001.md` for line conventions, ramp placement, and page layout.
+- Confirmed `01_Technical_Template/specs/technical_spec_v001.md` now contains explicit build, legend, and scale-check requirements.
 
 ## Next Steps
 
-1. Print v002b at 100% and run build test v002.
-2. Validate jam rate and direction-change targets from the v002 test sheet.
-3. Apply geometry refinements for v003 if hotspots are found.
+1. Rebuild the Codespace / devcontainer with the new `.devcontainer/devcontainer.json`.
+2. Verify `ANTHROPIC_API_KEY` is available in the container and rerun the generator as needed.
+3. Export reviewed technical template sheets to PDF and prepare a print/build test.
+4. Record build-test results and revise the technical spec if needed.
 
 ## Source of Truth
 

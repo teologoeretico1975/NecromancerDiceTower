@@ -1,0 +1,24 @@
+{
+  "name": "NecromancerDiceTower Dev Container",
+  "image": "mcr.microsoft.com/devcontainers/python:0-3.11",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "ms-python.python"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python3"
+      }
+    }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/git-lfs:1": {}
+  },
+  "postCreateCommand": "python -m pip install --upgrade pip && pip install anthropic python-dotenv",
+  "remoteEnv": {
+    "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}"
+  },
+  "remoteUser": "vscode"
+}

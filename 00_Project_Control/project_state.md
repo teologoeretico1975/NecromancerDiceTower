@@ -2,11 +2,11 @@
 
 ## Current Phase
 
-Technical Template v1
+Technical Template v1 review
 
 ## Current Goal
 
-Create a printable, buildable, untextured A4 dice tower prototype.
+Refine the technical specification and prepare the build test for the Necromancer Dice Tower.
 
 ## Product Name
 
@@ -75,4 +75,4 @@ Digital printable papercraft PDF kit for Etsy.
 
 ## Next Action
 
-Generate Technical Specification v1.
+Rebuild the container, verify the Anthropic secret, and run the reviewed technical specification through a print/build test.

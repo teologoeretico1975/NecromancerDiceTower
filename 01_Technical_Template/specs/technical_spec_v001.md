@@ -1,498 +1,284 @@
-# Necromancer Dice Tower — Technical Specification v001
+# Technical Specification v1
+## Necromancer Dice Tower — Printable Papercraft PDF Kit
 
-## Purpose
+**Document Type:** Technical Specification
+**Version:** 1.0
+**Phase:** Technical Template v1
+**Status:** Draft for prototype build
+**Paper Format:** A4 only
+**Print Scale:** 100% (no scaling, no "fit to page")
 
-This document defines the first technical prototype for a printable A4 papercraft dice tower.
-
-This is not the final decorated product.  
-The purpose of v001 is to verify that the tower can be printed, cut, folded, glued, and used with standard tabletop RPG dice.
-
----
-
-## Product Type
-
-Printable papercraft dice tower.
-
-## Format
-
-- Paper size: A4
-- Print scale: 100%
-- Recommended material: 200–250 gsm cardstock
-- Tools: scissors or craft knife, ruler, glue stick or PVA glue
-- Skill level: beginner/intermediate papercraft
+> Notes:
+> - This product is designed for manual papercraft assembly only.
+> - No laser cutter and no 3D printer are required.
+> - Follow the build sequence carefully to avoid blocking ramp installation.
 
 ---
 
-## Target Dice Compatibility
+## 1. Overall Tower Dimensions and Structure
 
-The tower should work with a standard tabletop RPG dice set:
+### 1.1 External Dimensions
 
-- d4
-- d6
-- d8
-- d10
-- d12
-- d20
+| Parameter | Value | Notes |
+|---|---|---|
+| Total height | 220 mm | Including crenellated top |
+| Tower shaft height | 180 mm | Excluding base tray and crenellations |
+| Tower footprint (shaft) | 70 × 70 mm | Square cross-section |
+| Base tray external | 130 × 100 mm | Dice catch area |
+| Base tray wall height | 25 mm | Retains dice on exit |
+| Crenellation height | 15 mm | Decorative gothic top |
 
-The d20 is the main reference die for internal clearance.
+### 1.2 Structural Form
 
----
+- Square-section vertical tower (4 walls).
+- Square cross-section chosen over hexagonal to simplify beginner assembly and reduce tab count.
+- Tower sits on top of an open-front rectangular catch tray.
+- Internal ramps deflect dice between 2 and 3 times before exit.
+- Total target rolls per dice drop: minimum 2 ramp impacts.
 
-## Overall Tower Dimensions
+> Note: the tower shaft height of 180 mm refers to the assembled wall section only; it excludes the base tray and the crenellation height.
 
-Proposed external dimensions:
+### 1.3 Material and Rigidity
 
-| Dimension | Value |
-|---|---:|
-| Height | 190 mm |
-| Width | 65 mm |
-| Depth | 65 mm |
-
-Proposed internal space:
-
-| Dimension | Value |
-|---|---:|
-| Internal width | approx. 58–60 mm |
-| Internal depth | approx. 58–60 mm |
-
-Reasoning:
-
-- Wide enough for standard dice.
-- Still compact enough for A4 papercraft.
-- Tall enough for 3 internal ramps.
-- Not too large for a first product.
+- Cardstock: 200–250 gsm.
+- Tower shaft is self-supporting due to closed box geometry.
+- Optional internal cardstock spine not required at this size.
 
 ---
 
-## Main Components
+## 2. Component Breakdown
 
-The prototype should include:
+### 2.1 Component List
 
-1. Main tower body
-2. Internal ramp A
-3. Internal ramp B
-4. Internal ramp C
-5. Top opening reinforcement
-6. Front exit arch or rectangular exit
-7. Optional base tray
-8. Glue tabs
-9. Scale check square
-10. Cut/fold/glue legend
+| ID | Component | Qty | Approx. Flat Size (mm) |
+|---|---|---|---|
+| A | Tower wall panel (front, with dice mouth) | 1 | 70 × 195 |
+| B | Tower wall panel (back, with exit window) | 1 | 70 × 195 |
+| C | Tower side wall panel | 2 | 70 × 195 |
+| D | Crenellated top ring (4 strips) | 4 | 70 × 15 |
+| E | Tower roof / cap (optional, open or closed) | 1 | 70 × 70 |
+| F | Internal ramp — upper | 1 | 68 × 50 |
+| G | Internal ramp — middle | 1 | 68 × 50 |
+| H | Internal ramp — lower (exit deflector) | 1 | 68 × 45 |
+| I | Catch tray floor | 1 | 130 × 100 |
+| J | Catch tray side wall (long) | 2 | 130 × 25 |
+| K | Catch tray side wall (short, back) | 1 | 100 × 25 |
+| L | Catch tray front lip (low) | 1 | 100 × 10 |
+| M | Tower-to-tray connector collar | 1 | 70 × 70 (frame) |
 
----
+**Total discrete pieces:** 15 (excluding decorative overlays).
 
-## A4 Sheet Plan
+> Note: flat panel dimensions exclude glue tabs unless explicitly stated. Standard glue tab width is 7 mm, with 5 mm tabs used for interior ramps and tight fits.
 
-### Sheet 1 — Main Tower Body
+### 2.2 Decorative Overlays (printed flat, glued onto walls)
 
-Contains:
+- 2D illustrated skull motif (above dice mouth, front panel A).
+- Gothic arch frame around dice mouth.
+- Invented rune band at mid-height of all 4 walls.
+- Muted necromantic green glow rendered around mouth and exit window.
+- Dark violet accent trim at base and top edges.
 
-- front panel
-- left side panel
-- right side panel
-- back panel
-- vertical glue tab
-- bottom tabs if needed
-- front dice exit cutout
-- top dice opening
+Overlays are pre-applied in the print artwork. No separate cutout overlays in v1.
 
-Approximate panel dimensions:
-
-| Part | Width | Height |
-|---|---:|---:|
-| Front panel | 65 mm | 190 mm |
-| Left side panel | 65 mm | 190 mm |
-| Back panel | 65 mm | 190 mm |
-| Right side panel | 65 mm | 190 mm |
-| Side glue tab | 10–12 mm | 190 mm |
-
-Total flat width:
-
-```text
-65 + 65 + 65 + 65 + 12 = 272 mm
-```
-
-This does not fit on A4 portrait width.
-
-Therefore the body cannot be a single horizontal strip on one A4 portrait page.
-
-### Required Solution
-
-Split the body into two pieces:
-
-#### Body Part A
-
-- front panel
-- left side panel
-- glue tab
-
-#### Body Part B
-
-- back panel
-- right side panel
-- glue tabs
-
-This allows the tower body to fit on A4 pages.
+> Each part must include a visible ID label, orientation arrow, and glue/tab marking to support build accuracy during assembly.
 
 ---
 
-## Sheet 1 — Body Part A
+## 3. Paper and Cutting Specifications
 
-Suggested parts:
+### 3.1 Paper Requirements
 
-| Part | Size |
-|---|---:|
-| Front panel | 65 × 190 mm |
-| Left side panel | 65 × 190 mm |
-| Glue tab | 10 × 190 mm |
+- Format: A4 (210 × 297 mm).
+- Weight: 200–250 gsm recommended.
+- Finish: Matte preferred (reduces glare and supports dark fantasy art).
+- Color: White base required for correct color reproduction.
 
-Approximate flat width:
+### 3.2 Cutting Tools (User Side)
 
-```text
-65 + 65 + 10 = 140 mm
-```
+- Craft knife (recommended) OR sharp scissors.
+- Metal ruler.
+- Cutting mat.
+- No laser cutter required (commercial claim).
+- No 3D printer required (commercial claim).
 
-This fits on A4.
+### 3.3 Line Definitions in Artwork
 
-Include:
+| Line Style | Meaning | Print Color |
+|---|---|---|
+| Solid black, 0.5 pt | Cut line | 100% K |
+| Dashed blue line | Valley fold | Blue |
+| Dotted red line | Mountain fold | Red |
+| Light gray filled area | Glue tab area | 20% K |
+| Thin gray outline | Bleed / safety margin | Non-printing in final |
 
-- front exit cutout
-- fold line between front and left side
-- glue tab on one side
-- labels: FRONT, LEFT SIDE, GLUE TAB
-- scale check square 20 × 20 mm
+> Use the same cut/fold/glue legend style across all template sheets and the dedicated legend page.
 
----
+### 3.4 Tab Specifications
 
-## Sheet 2 — Body Part B
-
-Suggested parts:
-
-| Part | Size |
-|---|---:|
-| Back panel | 65 × 190 mm |
-| Right side panel | 65 × 190 mm |
-| Glue tab A | 10 × 190 mm |
-| Glue tab B | 10 × 190 mm |
-
-Approximate flat width:
-
-```text
-10 + 65 + 65 + 10 = 150 mm
-```
-
-This fits on A4.
-
-Include:
-
-- fold line between back and right side
-- glue tabs
-- labels: BACK, RIGHT SIDE, GLUE TAB
+- Glue tab width: 7 mm (standard).
+- Glue tab width on ramps: 5 mm (tight interior fit).
+- Tab corners: clipped at 45° to avoid show-through at edges.
+- All tabs labeled with matching letter pairs (e.g., `T1 ↔ T1`).
 
 ---
 
-## Sheet 3 — Internal Ramps
+## 4. Fold and Glue Instructions and Locations
 
-The tower should use 3 internal ramps.
+### 4.1 Fold Convention
 
-### Ramp Dimensions
+- Valley fold: paper folds toward the reader; printed side becomes inside the angle.
+- Mountain fold: paper folds away from reader; printed side stays outside.
+- Score all folds before folding (bone folder or empty ballpoint).
 
-Suggested ramp body:
+### 4.2 Tower Shaft Folds
 
-| Dimension | Value |
-|---|---:|
-| Ramp width | 58 mm |
-| Ramp length | 70 mm |
-| Side glue tabs | 8–10 mm each |
-| Back glue tab | 8–10 mm |
+- Walls A, B, C, C are separate flat panels. Page layout may place them adjacent or in a continuous strip for print efficiency, but each wall is cut as its own panel and folded independently.
+- If printed as a continuous strip, there are 3 vertical valley folds at the panel boundaries.
+- Final closing seam: one 7 mm glue tab on the trailing edge of wall C, bonded to the leading edge of wall A.
 
-The ramps should be slightly narrower than the internal width.
+### 4.3 Crenellation Folds
 
-If the internal width is approx. 60 mm, use:
+- Crenellated strips D fold at the top edge of each wall (valley fold inward, then mountain fold to form 2-layer crenellation for stiffness).
 
-```text
-Ramp width: 56–58 mm
-```
+### 4.4 Ramp Folds
 
-### Ramp Angle
+- Each ramp (F, G, H) has:
+  - 1 central deflector panel.
+  - 2 side glue tabs (5 mm) folded as mountain folds at 90°.
+- Ramps glue to interior wall faces at marked rectangles ("RAMP ZONE F", "RAMP ZONE G", "RAMP ZONE H").
+- Positioning guidelines:
+  - Ramp F attaches to the left interior face with its top edge 25 mm below the top of the front opening.
+  - Ramp G attaches to the opposite interior face with its top edge 80 mm below the top of the front opening.
+  - Ramp H attaches to the back interior face with its top edge 30 mm above the tower base.
+- Each ramp tab is dimensioned to fit within its printed ramp zone to ensure consistent alignment and assembly accuracy.
 
-Target ramp angle:
+### 4.5 Ramp Angles
 
-```text
-35°–45°
-```
+- Upper ramp F: 40° from horizontal.
+- Middle ramp G: 40° from horizontal, opposite tilt to F.
+- Lower ramp H: 30° from horizontal, tilted toward exit window.
+- Angles set by ramp tab geometry — user does not measure angles manually.
 
-For v001, use a practical fold-and-glue ramp rather than a mathematically perfect one.
+### 4.6 Tray Folds
 
-### Ramp Placement
+- Tray floor I lies flat.
+- Walls J, K fold up via valley folds along marked tray edges.
+- Front lip L is a low front retainer to prevent dice escape.
+- Tray-to-tower collar M sits on tray floor at rear and receives the tower shaft footprint.
 
-Suggested placement from top:
+### 4.7 Glue Type
 
-| Ramp | Approx. Height from Bottom | Direction |
-|---|---:|---|
-| Ramp A | 145 mm | slopes down left-to-right |
-| Ramp B | 95 mm | slopes down right-to-left |
-| Ramp C | 45 mm | slopes down left-to-right toward exit |
-
-This creates a zig-zag dice path.
-
----
-
-## Sheet 4 — Base Tray / Exit Tray
-
-Optional for v001 but recommended for sellable product.
-
-Suggested tray dimensions:
-
-| Part | Size |
-|---|---:|
-| Tray floor | 95 × 90 mm |
-| Front wall | 95 × 25 mm |
-| Left wall | 90 × 25 mm |
-| Right wall | 90 × 25 mm |
-| Back connection flap | 65 × 20 mm |
-
-The tray catches dice after they exit the tower.
-
-For v001, the tray can be simple and rectangular.
+- Recommended: PVA white glue or paper glue stick.
+- Not recommended: super glue (warps cardstock), hot glue (too thick).
 
 ---
 
-## Dice Exit
+## 5. Assembly Sequence and Build Order
 
-Minimum suggested opening:
+**Build order is fixed. Out-of-order assembly will block ramp installation.**
 
-| Dimension | Value |
-|---|---:|
-| Width | 45–50 mm |
-| Height | 38–45 mm |
-
-Recommended v001:
-
-```text
-50 mm wide × 42 mm high
-```
-
-Shape:
-
-- rectangular for technical v001
-- gothic arch for final art version
-
-The technical prototype may use a rectangular exit to simplify cutting.
+1. **Cut** all pieces from all printed sheets. Verify scale check square first (see §9).
+2. **Score** all fold lines before any folding.
+3. **Pre-fold** all valley and mountain folds to relax the fiber.
+4. **Install ramps F, G, H** onto their marked interior wall zones **before closing the tower shaft**. This is critical — ramps cannot be installed once the box is closed.
+   - Glue ramp F to wall C (left interior), upper position.
+   - Glue ramp G to wall C (right interior), middle position.
+   - Glue ramp H to wall B (back interior), lower position, angled toward exit window.
+5. **Close the tower shaft**: fold the wall strip into a square section and glue the final seam tab.
+6. **Attach crenellation strips D** to the top edge of the four walls.
+7. **(Optional) Attach roof cap E.** Leaving it open is acceptable and recommended for v1 testing.
+8. **Assemble catch tray**: fold walls J, K, L up from floor I, glue corner tabs.
+9. **Glue collar M** to tray floor at the rear, aligned with tower footprint.
+10. **Seat tower shaft** on collar M and glue.
+11. **Cure** under light weight for 30 minutes.
 
 ---
 
-## Top Opening
+## 6. Dice Entry and Exit Specifications
 
-Suggested opening:
+### 6.1 Dice Entry (Top Mouth, Front Panel A)
 
-```text
-50 mm × 50 mm minimum
-```
+- Mouth shape: gothic pointed arch.
+- Internal clear opening: **35 mm wide × 40 mm tall**.
+- Supports dice up to and including standard d20 (≈20 mm) and oversized d20 up to 25 mm.
+- Located on front wall A, centered horizontally, with top edge 20 mm below crenellation base.
 
-The top can remain open in v001.
+### 6.2 Dice Exit (Bottom Rear, Back Panel B)
 
-Optional later:
+- Exit window shape: low gothic arch.
+- Internal clear opening: **45 mm wide × 22 mm tall**.
+- Bottom edge of exit aligned flush with tower base (height 0 mm relative to tray floor).
+- Exit faces into the catch tray interior.
+- Lower ramp H directs dice through this opening.
 
-- decorative top rim
-- gothic crenellations
-- skull ornament
-- rune border
+### 6.3 Internal Clearance
 
----
-
-## Glue Tab Strategy
-
-Recommended glue tab width:
-
-```text
-8–12 mm
-```
-
-Rules:
-
-- Use 10 mm tabs for main body joins.
-- Use 8 mm tabs for ramps.
-- Use 10 mm tabs for tray walls.
-- Avoid very small tabs below 6 mm.
-- Mark all glue tabs clearly with light gray fill and “GLUE”.
+- Minimum internal channel width at any ramp pinch point: **30 mm**.
+- Verified for d20 ≤ 22 mm passage.
 
 ---
 
-## Line Legend
+## 7. Page Layout Strategy
 
-Use this convention in SVG/PDF:
+### 7.1 Target Page Count
 
-| Line Type | Meaning |
+**6 A4 part sheets** for the v1 prototype. Sheet 6 also includes the legend and scale check square.
+
+| Sheet | Contents |
 |---|---|
-| Solid black line | Cut |
-| Dashed blue line | Valley fold |
-| Dotted red line | Mountain fold |
-| Light gray area | Glue tab |
-| Numbered circle | Assembly order |
+| 1 | Front wall A + skull/arch decoration |
+| 2 | Back wall B (with exit) + side wall C #1 |
+| 3 | Side wall C #2 + crenellation strips D |
+| 4 | Ramps F, G, H + roof cap E + collar M |
+| 5 | Tray floor I + tray walls J |
+| 6 | Tray walls K, L + spares + scale check square + legend |
+
+> The scale check square must appear on both sheet 6 and the dedicated legend page to ensure print accuracy across variants.
+
+### 7.2 Print Margins
+
+- Printable safe area: 190 × 277 mm centered on A4.
+- 10 mm minimum margin from sheet edge (printer-safe).
+- No component exceeds 190 mm in any dimension when flat.
+
+### 7.3 Additional PDF Pages (Non-Part Pages)
+
+- 1 page: Cover.
+- 1 page: Printing guide + paper recommendation.
+- 1 page: Legend (cut/fold/glue) + scale check square (also duplicated on sheet 6).
+- 2–4 pages: Assembly instructions with diagrams.
+
+### 7.4 Variant PDFs
+
+- Color PDF: full art.
+- Low ink PDF: same geometry, reduced dark fills, line art emphasis.
+- Black and white coloring PDF: outlines only, user-colorable.
+
+All three variants share **identical cut geometry** for cross-compatibility.
 
 ---
 
-## Scale Check
+## 8. Cut / Fold / Glue Legend Requirements
 
-Every printable sheet should include:
+The legend must appear on:
 
-```text
-20 mm × 20 mm scale check square
-```
+- The dedicated legend page.
+- Sheet 6 (parts sheet) as a printed reference.
 
-Label:
+Legend must include, with both visual sample and text label:
 
-```text
-Scale check: this square must measure 20 × 20 mm when printed at 100%.
-```
+1. **Cut line** — solid black line, "Cut along this line".
+2. **Valley fold** — dashed blue line, "Fold valley (toward you)".
+3. **Mountain fold** — dotted red line, "Fold mountain (away from you)".
+4. **Glue tab** — gray-filled shape, "Apply glue to this area".
+5. **Do not cut** — internal reference line indicator.
+6. **Score before folding** — icon reminder.
 
----
+## 9. Scale Check Square and Quality Assurance
 
-## Assembly Order
-
-Recommended v001 assembly:
-
-1. Print all sheets at 100%.
-2. Check the 20 × 20 mm scale square.
-3. Cut Body Part A.
-4. Cut Body Part B.
-5. Score fold lines.
-6. Pre-fold body panels.
-7. Cut front dice exit.
-8. Glue Body Part A and Body Part B together.
-9. Glue the tower body into a rectangular tube.
-10. Cut and fold Ramp A.
-11. Insert and glue Ramp A.
-12. Cut and fold Ramp B.
-13. Insert and glue Ramp B.
-14. Cut and fold Ramp C.
-15. Insert and glue Ramp C.
-16. Assemble optional base tray.
-17. Attach tower to base tray.
-18. Let glue dry fully.
-19. Test dice flow.
-
----
-
-## Physical Build Test
-
-### Print Test
-
-- [ ] Printed on A4
-- [ ] Printed at 100%
-- [ ] “Fit to page” disabled
-- [ ] Scale square measures 20 × 20 mm
-- [ ] Lines are readable
-- [ ] No important elements clipped by printer margins
-
-### Cutting Test
-
-- [ ] Cut lines are clear
-- [ ] Exit opening is easy enough to cut
-- [ ] Tabs are not too small
-- [ ] Ramps are not too fiddly
-- [ ] Pieces are labeled clearly
-
-### Folding Test
-
-- [ ] Fold lines are understandable
-- [ ] Body closes into a rectangle
-- [ ] Glue tabs align
-- [ ] Ramps can be folded cleanly
-
-### Assembly Test
-
-- [ ] Body stands upright
-- [ ] Ramps are reachable during assembly
-- [ ] Ramps can be glued without excessive frustration
-- [ ] Tray connects correctly
-- [ ] Model feels stable enough
-
-### Dice Test
-
-- [ ] d20 enters from top
-- [ ] d20 does not jam frequently
-- [ ] dice bounce across ramps
-- [ ] dice exit from front
-- [ ] tray catches dice
-- [ ] tower does not tip over during normal use
-
----
-
-## Common Failure Points
-
-### Failure 1 — Body strip too wide for A4
-
-Mitigation:
-
-- split tower body into two printable pieces.
-
-### Failure 2 — Ramps difficult to glue inside tower
-
-Mitigation:
-
-- add large side tabs.
-- mark ramp positions inside panels before closing tower body.
-- consider gluing ramps before fully closing the body.
-
-### Failure 3 — Dice jam inside tower
-
-Mitigation:
-
-- increase internal width.
-- reduce ramp length.
-- increase vertical spacing.
-- use smoother ramp angles.
-
-### Failure 4 — Exit too small
-
-Mitigation:
-
-- enlarge exit to at least 50 × 42 mm.
-- avoid decorative details that reduce clearance.
-
-### Failure 5 — Tower tips over
-
-Mitigation:
-
-- add base tray.
-- slightly widen tray.
-- keep tower height below 220 mm.
-
----
-
-## Acceptance Criteria for Technical v001
-
-The technical prototype passes if:
-
-- [ ] All parts fit on A4 pages.
-- [ ] Template prints at 100%.
-- [ ] Scale square is correct.
-- [ ] Tower can be assembled by one person.
-- [ ] The body closes correctly.
-- [ ] At least 80% of dice test rolls exit successfully.
-- [ ] The model stands upright.
-- [ ] No critical part requires impossible gluing.
-- [ ] Required corrections are manageable in v002.
-
----
-
-## Notes for Later Art Pass
-
-Do not add final artwork until the physical prototype passes.
-
-Future decorative surfaces:
-
-- front panel: gothic arch, skull emblem, rune border
-- side panels: cracked stone texture
-- back panel: larger rune pattern
-- top rim: necromantic glow
-- exit area: gothic gate shape
-- tray floor: ritual circle or cracked stone floor
-
-Final variants:
-
-- full color
-- low ink
-- black and white coloring version
+- Include a 20 × 20 mm scale check square on sheet 6 and on the dedicated legend page.
+- Before cutting, verify the printed 20 × 20 mm square with a ruler and ensure the sheet size is A4 (210 × 297 mm).
+- The scale check square is the first quality checkpoint for print accuracy and template fidelity.
+- Confirm the print output uses 100% scale and no resizing.
+- Mark sheet 6 as the primary build-test reference page for assembly verification.
+- If the square measures outside ±0.5 mm, do not continue cutting; adjust printer settings and reprint.
