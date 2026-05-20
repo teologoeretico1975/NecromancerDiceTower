@@ -1,26 +1,6 @@
 {
   "name": "NecromancerDiceTower Dev Container",
   "image": "mcr.microsoft.com/devcontainers/python:0-3.11",
-  "extensions": [
-    "GitHub.copilot",
-    "GitHub.copilot-chat",
-    "ms-python.python"
-  ],
-  "postCreateCommand": "python -m pip install --upgrade pip && pip install anthropic python-dotenv",
-  "remoteEnv": {
-    "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}"
-  },
-  "settings": {
-    "python.defaultInterpreterPath": "/usr/local/bin/python3"
-  },
-  "remoteUser": "vscode"
-}
-{
-  "name": "Necromancer Dice Tower",
-  "image": "mcr.microsoft.com/devcontainers/python:3.11",
-  "features": {
-    "ghcr.io/devcontainers/features/git:1": {}
-  },
   "customizations": {
     "vscode": {
       "extensions": [
@@ -29,13 +9,16 @@
         "ms-python.python"
       ],
       "settings": {
-        "python.defaultInterpreterPath": "/usr/local/bin/python",
-        "python.linting.enabled": true,
-        "python.linting.pylintEnabled": true,
-        "python.formatting.provider": "black"
+        "python.defaultInterpreterPath": "/usr/local/bin/python3"
       }
     }
   },
-  "postCreateCommand": "pip install --upgrade pip && pip install anthropic python-dotenv",
-  "remoteUser": "root"
+  "features": {
+    "ghcr.io/devcontainers/features/git-lfs:1": {}
+  },
+  "postCreateCommand": "python -m pip install --upgrade pip && pip install anthropic python-dotenv",
+  "remoteEnv": {
+    "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}"
+  },
+  "remoteUser": "vscode"
 }
