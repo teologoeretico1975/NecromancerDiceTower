@@ -101,6 +101,38 @@ Notes:
 
 ---
 
+## Build Test Focus — Sheet 05 Terrace (2026-05-22)
+
+Target geometry baseline (current technical set):
+- Tower footprint: 65 x 65 mm
+- Sheet 05 tray floor: 100 x 130 mm
+- Effective visible terrace target: about 65 mm
+
+Sheet 05 checks:
+- [ ] F1/F2/F3/F4 fold cleanly to 90° without tearing
+- [ ] F5(M) mountain fold is clear and stable after glue cure
+- [ ] Rear flap (65 mm) aligns with tower coupling zone
+- [ ] Front lip keeps dice in tray during normal d20 rolls
+- [ ] No annotation overlap affects assembly readability
+
+Terrace visibility and exit checks:
+- [ ] At rest, exited die is visible from top-front user view
+- [ ] Dice do not rebound out of tray in 20 test rolls (d6)
+- [ ] Dice remain catchable without entering tower base area
+- [ ] At least 80% of exits land in visible terrace zone
+
+Record measured values:
+
+| Metric | Target | Measured | Pass/Fail | Notes |
+|---|---:|---:|---|---|
+| Tower footprint width | 65 mm | | | |
+| Rear flap width | 65 mm | | | |
+| Tray floor depth | 130 mm | | | |
+| Effective terrace depth | 65 mm | | | |
+| Front lip height | 10 mm | | | |
+
+---
+
 ## Ramp Geometry Verification
 
 Record real build measurements:
@@ -183,6 +215,38 @@ YES / NO
 ```
 
 Reason:
+
+---
+
+## Pass Criteria (Go / No-Go)
+
+Use this gate after completing all checks above.
+
+Go to art pass only if all mandatory criteria pass:
+
+1. Geometry and print fidelity
+	- [ ] Scale square = 20 x 20 mm (tolerance +/- 0.5 mm)
+	- [ ] Tower footprint measured = 65 x 65 mm (tolerance +/- 1 mm)
+	- [ ] Tray floor measured = 100 x 130 mm (tolerance +/- 1 mm)
+	- [ ] Rear flap width measured = 65 mm (tolerance +/- 1 mm)
+
+2. Tray behavior (Sheet 05)
+	- [ ] Effective visible terrace depth >= 60 mm
+	- [ ] No dice rebound-out events in 20 d6 rolls
+	- [ ] >= 80% of exits land in visible terrace zone
+
+3. Dice flow reliability
+	- [ ] d4 success >= 92% and jam <= 8%
+	- [ ] d6 success >= 96% and jam <= 4%
+	- [ ] d8/d10/d12/d20 success >= 95% and jam <= 5%
+
+4. Structural integrity
+	- [ ] Ramp sag <= 3 mm after 200 cumulative rolls
+	- [ ] No tab delamination or wall detachment
+
+Decision rule:
+- If all mandatory criteria pass -> mark Decision = YES.
+- If one or more mandatory criteria fail -> mark Decision = NO and log fixes in "Corrections Needed for v003".
 
 ---
 

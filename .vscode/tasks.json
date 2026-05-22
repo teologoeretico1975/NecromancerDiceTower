@@ -4,68 +4,94 @@
     {
       "label": "Export Sheet 01 SVG to PDF",
       "type": "shell",
-      "command": "inkscape",
+      "command": "powershell.exe",
       "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/export_svg_to_pdf.ps1",
         "01_Technical_Template/svg/sheet_01_body_a.svg",
-        "--export-type=pdf",
-        "--export-filename=01_Technical_Template/pdf/sheet_01_body_a.pdf"
+        "01_Technical_Template/pdf/sheet_01_body_a.pdf"
       ],
       "problemMatcher": []
     },
     {
       "label": "Export Sheet 02 SVG to PDF",
       "type": "shell",
-      "command": "inkscape",
+      "command": "powershell.exe",
       "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/export_svg_to_pdf.ps1",
         "01_Technical_Template/svg/sheet_02_body_b.svg",
-        "--export-type=pdf",
-        "--export-filename=01_Technical_Template/pdf/sheet_02_body_b.pdf"
+        "01_Technical_Template/pdf/sheet_02_body_b.pdf"
       ],
       "problemMatcher": []
     },
     {
       "label": "Export Sheet 03 SVG to PDF",
       "type": "shell",
-      "command": "inkscape",
+      "command": "powershell.exe",
       "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/export_svg_to_pdf.ps1",
         "01_Technical_Template/svg/sheet_03_ramps_ab.svg",
-        "--export-type=pdf",
-        "--export-filename=01_Technical_Template/pdf/sheet_03_ramps_ab.pdf"
+        "01_Technical_Template/pdf/sheet_03_ramps_ab.pdf"
       ],
       "problemMatcher": []
     },
     {
       "label": "Export Sheet 04 SVG to PDF",
       "type": "shell",
-      "command": "inkscape",
+      "command": "powershell.exe",
       "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/export_svg_to_pdf.ps1",
         "01_Technical_Template/svg/sheet_04_ramp_c.svg",
-        "--export-type=pdf",
-        "--export-filename=01_Technical_Template/pdf/sheet_04_ramp_c.pdf"
+        "01_Technical_Template/pdf/sheet_04_ramp_c.pdf"
       ],
       "problemMatcher": []
     },
     {
       "label": "Export Sheet 05 SVG to PDF",
       "type": "shell",
-      "command": "inkscape",
+      "command": "powershell.exe",
       "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/export_svg_to_pdf.ps1",
         "01_Technical_Template/svg/sheet_05_base_tray.svg",
-        "--export-type=pdf",
-        "--export-filename=01_Technical_Template/pdf/sheet_05_base_tray.pdf"
+        "01_Technical_Template/pdf/sheet_05_base_tray.pdf"
       ],
       "problemMatcher": []
     },
     {
       "label": "Export All Technical SVGs to PDF",
-      "dependsOrder": "sequence",
-      "dependsOn": [
-        "Export Sheet 01 SVG to PDF",
-        "Export Sheet 02 SVG to PDF",
-        "Export Sheet 03 SVG to PDF",
-        "Export Sheet 04 SVG to PDF",
-        "Export Sheet 05 SVG to PDF"
+      "type": "shell",
+      "command": "powershell.exe",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/export_all_technical_pdfs.ps1"
       ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      },
       "problemMatcher": []
     }
   ]
