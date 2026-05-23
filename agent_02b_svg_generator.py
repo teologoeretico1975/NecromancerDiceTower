@@ -847,48 +847,51 @@ def draw_sheet_06_instructions(cfg: SpecConfig) -> Path:
                         fill="white", stroke="black", stroke_width=0.4, stroke_dasharray="1,1"))
     dwg.add(dwg.text("← clean corner", insert=(nx2 + 31, ny2 + 12), **TEXT_STYLE))
 
-    # ── Section C: ASSEMBLY ORDER (left column) ───────────────────────────────
-    cx, cy = 10, 155
+    # ── Section C: ASSEMBLY ORDER (full width, stacked) ───────────────────────
+    cx, cy = 10, 152
     dwg.add(dwg.text("C — OVERALL ASSEMBLY ORDER",
                      insert=(cx, cy), font_size="5px", font_family="Arial",
                      font_weight="bold", fill="#222222"))
     steps = [
         "1. Print all sheets at 100% — do NOT scale to fit.",
         "2. SCORE all blue dashed (valley) and red dotted (mountain) fold lines BEFORE cutting.",
-        "3. CUT all solid black lines.  Remove orange notch triangles on each ramp.",
-        "4. Assemble BASE TRAY (Sheet 05): fold F1–F4 valley, F5 mountain, glue corner tabs.",
-        "5. Assemble BODY A (Sheet 01): fold panels to form front + left side.",
-        "6. Assemble BODY B (Sheet 02): fold panels to form back + right side.  Glue A+B together.",
-        "7. Pre-fold RAMP C first (lowest ramp), dry-fit, then glue onto anchor marks C-L / C-R.",
-        "8. Pre-fold RAMP B, dry-fit on B-L / B-R anchors.  Verify HIGH/LOW orientation.",
-        "9. Pre-fold RAMP A, dry-fit on A-L / A-R anchors.  Verify flow direction.",
-        "10.Glue one side-tab first; verify ramp lays flat; then glue the opposite tab.",
-        "11.Attach base tray.  Drop test with d6 from the top to verify free passage.",
+        "3. CUT all solid black lines. Remove orange notch triangles on each ramp.",
+        "4. BASE TRAY (Sheet 05): fold F1–F4 valley, F5 mountain, glue corner tabs.",
+        "5. BODY A (Sheet 01): fold panels — front + left side.",
+        "6. BODY B (Sheet 02): fold panels — back + right side. Glue A+B together.",
+        "7. Pre-fold RAMP C (lowest), dry-fit, glue onto anchor marks C-L / C-R.",
+        "8. Pre-fold RAMP B, dry-fit on B-L / B-R. Verify HIGH/LOW orientation.",
+        "9. Pre-fold RAMP A, dry-fit on A-L / A-R. Verify flow direction.",
+        "10. Glue one side-tab first; verify ramp lays flat; then glue opposite tab.",
+        "11. Attach base tray. Drop test with d6 to verify free passage.",
     ]
+    _line_h = 5.0
     for _k, _s in enumerate(steps):
-        dwg.add(dwg.text(_s, insert=(cx + 2, cy + 8 + _k * 6), **TEXT_STYLE))
+        dwg.add(dwg.text(_s, insert=(cx + 2, cy + 7 + _k * _line_h), **TEXT_STYLE))
 
-    # ── Section D: MATERIAL TIPS (right column, same start y as C) ────────────
-    dx, dy = 108, 155
-    # Vertical separator
-    dwg.add(dwg.line(start=(dx - 3, dy - 5), end=(dx - 3, dy + 75),
-                     stroke="#cccccc", stroke_width=0.5))
+    # ── Section D: MATERIAL TIPS (stacked below C) ────────────────────────────
+    _c_bottom = cy + 7 + len(steps) * _line_h
+    dx, dy = 10, _c_bottom + 7
+    dwg.add(dwg.line(start=(dx, dy - 3), end=(190, dy - 3),
+                     stroke="#cccccc", stroke_width=0.4))
     dwg.add(dwg.text("D — MATERIALS & TOOLS",
                      insert=(dx, dy), font_size="5px", font_family="Arial",
                      font_weight="bold", fill="#222222"))
-    tips = [
-        "Cardstock: 200–250 gsm recommended.",
-        "300 gsm possible but harder to fold ramp steps.",
-        "Scoring tool: bone folder, blunt scissors back,",
-        "  or empty ballpoint pen.",
-        "Cutting: craft knife + metal ruler on cutting mat.",
-        "  Scissors for gentle curves only.",
-        "Glue: PVA (white craft glue) or glue stick.",
-        "  Apply thin bead; hold 30 s with finger.",
-        "Do NOT use hot glue — sets before alignment.",
+    # Two-column layout for tips (each column ~90mm wide, ~55 chars safe)
+    tips_col1 = [
+        "• Cardstock: 200–250 gsm recommended (300 gsm possible).",
+        "• Score with bone folder, blunt scissors back, or empty ballpoint.",
+        "• Cut with craft knife + metal ruler on cutting mat.",
     ]
-    for _k, _s in enumerate(tips):
-        dwg.add(dwg.text(f"{_s}", insert=(dx + 2, dy + 8 + _k * 6), **TEXT_STYLE))
+    tips_col2 = [
+        "• Glue: PVA or glue stick. Thin bead; hold 30 s.",
+        "• Do NOT use hot glue — sets before alignment.",
+        "• Scissors only for gentle curves, not fold lines.",
+    ]
+    for _k, _s in enumerate(tips_col1):
+        dwg.add(dwg.text(_s, insert=(dx + 2, dy + 7 + _k * _line_h), **TEXT_STYLE))
+    for _k, _s in enumerate(tips_col2):
+        dwg.add(dwg.text(_s, insert=(dx + 97, dy + 7 + _k * _line_h), **TEXT_STYLE))
 
     add_common(dwg)
     dwg.save()
