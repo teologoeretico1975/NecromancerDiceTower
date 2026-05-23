@@ -585,6 +585,22 @@ def draw_sheet_01_body_a(cfg: SpecConfig) -> Path:
     add_centered_panel_label(dwg, "FRONT", x0 + tab_w, y0, front_w, h)
     add_centered_panel_label(dwg, "LEFT SIDE", x0 + tab_w + front_w, y0, left_w, h)
 
+    # Front dice-exit arch (cut opening) requested for Sheet 01 FRONT panel.
+    # Low gothic arch, centered on FRONT panel.
+    arch_w = 45.0
+    arch_h = 22.0
+    front_cx = x0 + tab_w + front_w / 2
+    sill_y = y0 + h - 12.0
+    arch_left = front_cx - arch_w / 2
+    arch_right = front_cx + arch_w / 2
+    arch_apex_y = sill_y - arch_h
+    arch_path = (
+        f"M {arch_left},{sill_y} "
+        f"Q {front_cx},{arch_apex_y} {arch_right},{sill_y} "
+        f"L {arch_left},{sill_y} Z"
+    )
+    dwg.add(dwg.path(d=arch_path, **CUT_STYLE))
+
     if cfg.use_v002_ramp_rules:
         # v002 requires short anchor ticks instead of long full guide lines.
         panel_left_x = x0 + tab_w
@@ -793,19 +809,47 @@ def draw_ramp(
 
 def draw_sheet_03_ramps_ab(cfg: SpecConfig) -> Path:
     output = get_svg_output_path("sheet_03_ramps_ab.svg")
-    dwg = create_drawing(output, "Sheet 03 - Ramps A and B")
-    dwg.add(dwg.text("v003 — RAMPS A and B", insert=(10, 14), font_size="5px", font_family="Arial", font_weight="bold", fill="black"))
-    dwg.add(dwg.text(
-        f"Pitch p={int(cfg.tread)}mm  rise h={cfg.rise:.1f}mm  modules={cfg.modules}  wall={int(cfg.side_wall_h)}mm  See Sheet 06 for full instructions.",
-        insert=(10, 20), **TEXT_STYLE,
-    ))
-    # Locked layout profile from manual readability iteration:
-    # Ramp A top-left, Ramp B lower-right to preserve callout breathing room.
-    dwg.add(dwg.text("RAMP A: L → R (HIGH side at back tab)", insert=(22.4, 27.7), **TEXT_STYLE))
-    draw_ramp(dwg, cfg, x0=12.0, y0=41.56, label="RAMP A", flow_direction="L->R", callout_scale=0.8)
+    dwg = create_drawing(output, "Sheet 03 - Baffle Core Bulkheads")
+    dwg.add(dwg.text("v004 — BAFFLE CORE (BULKHEADS)", insert=(10, 14), font_size="5px", font_family="Arial", font_weight="bold", fill="black"))
+    dwg.add(dwg.text("Replace ramps with anti-jam bulkheads. Keep central die channel clear (>=30 mm).", insert=(10, 20), **TEXT_STYLE))
 
-    dwg.add(dwg.text("RAMP B: R ← L (HIGH side at back tab)", insert=(114.8, 142.5), **TEXT_STYLE))
-    draw_ramp(dwg, cfg, x0=104.89, y0=155.68, label="RAMP B", flow_direction="R->L", callout_scale=0.8)
+    def draw_bulkhead(x: float, y: float, label: str, top_side: str) -> None:
+        tab = 5.0
+        body_w = 55.0
+        body_h = 120.0
+        total_w = tab + body_w + tab
+
+        # Glue tabs
+        dwg.add(dwg.rect(insert=(x, y), size=(tab, body_h), fill=GLUE_TAB_FILL, stroke="none"))
+        dwg.add(dwg.rect(insert=(x + tab + body_w, y), size=(tab, body_h), fill=GLUE_TAB_FILL, stroke="none"))
+        add_rect(dwg, x, y, total_w, body_h, CUT_STYLE)
+        dwg.add(dwg.line(start=(x + tab, y), end=(x + tab, y + body_h), **VALLEY_STYLE))
+        dwg.add(dwg.line(start=(x + tab + body_w, y), end=(x + tab + body_w, y + body_h), **VALLEY_STYLE))
+
+        # Alternating windows for chicane flow
+        win_w = 22.0
+        win_h = 16.0
+        top_y = y + 20.0
+        low_y = y + 74.0
+        if top_side == "left":
+            top_x = x + tab + 4.0
+            low_x = x + tab + body_w - win_w - 4.0
+        else:
+            top_x = x + tab + body_w - win_w - 4.0
+            low_x = x + tab + 4.0
+        add_rect(dwg, top_x, top_y, win_w, win_h, CUT_STYLE)
+        add_rect(dwg, low_x, low_y, win_w, win_h, CUT_STYLE)
+
+        dwg.add(dwg.text(label, insert=(x + tab + 17, y - 3), font_size="4.2px", font_family="Arial", fill="black", font_weight="bold"))
+        dwg.add(dwg.text("GLUE TAB", insert=(x + 0.4, y + body_h + 5), font_size="2.9px", font_family="Arial", fill="black"))
+        dwg.add(dwg.text("GLUE TAB", insert=(x + tab + body_w + 0.4, y + body_h + 5), font_size="2.9px", font_family="Arial", fill="black"))
+
+    draw_bulkhead(x=10.0, y=34.0, label="B1 — BULKHEAD", top_side="left")
+    draw_bulkhead(x=104.0, y=34.0, label="B2 — BULKHEAD", top_side="right")
+
+    dwg.add(dwg.text("Open windows must alternate left/right between B1 and B2.", insert=(10, 165), font_size="3.2px", font_family="Arial", fill="black"))
+    dwg.add(dwg.text("Install B1 above B2 with 25–30 mm vertical gap in final assembly.", insert=(10, 169), font_size="3.2px", font_family="Arial", fill="black"))
+
     add_common(dwg)
     dwg.save()
     return output
@@ -813,22 +857,54 @@ def draw_sheet_03_ramps_ab(cfg: SpecConfig) -> Path:
 
 def draw_sheet_04_ramp_c(cfg: SpecConfig) -> Path:
     output = get_svg_output_path("sheet_04_ramp_c.svg")
-    dwg = create_drawing(output, "Sheet 04 - Ramp C")
-    dwg.add(dwg.text("v003 — RAMP C", insert=(10, 14), font_size="5px", font_family="Arial", font_weight="bold", fill="black"))
-    dwg.add(dwg.text(
-        f"Pitch p={int(cfg.tread)}mm  rise h={cfg.rise:.1f}mm  modules={cfg.modules}  wall={int(cfg.side_wall_h)}mm  See Sheet 06 for full instructions.",
-        insert=(10, 20), **TEXT_STYLE,
-    ))
-    # Locked placement from manual readability iteration.
-    dwg.add(dwg.text("RAMP C: L → R (toward exit — HIGH side at back tab)", insert=(57.94, 57.60), **TEXT_STYLE))
-    draw_ramp(dwg, cfg, x0=57.57, y0=72.04, label="RAMP C", flow_direction="L->R", callout_scale=0.8)
+    dwg = create_drawing(output, "Sheet 04 - Baffle Core Deflectors")
+    dwg.add(dwg.text("v004 — BAFFLE CORE (DEFLECTOR FINS)", insert=(10, 14), font_size="5px", font_family="Arial", font_weight="bold", fill="black"))
+    dwg.add(dwg.text("Cut 6 fins. Fold on BLUE line. Glue gray tab to inside wall.", insert=(10, 20), **TEXT_STYLE))
+
+    def draw_fin(x: float, y: float, label: str, mirror: bool = False) -> None:
+        tab_w = 8.0
+        fin_w = 22.0
+        fin_h = 18.0
+        total_w = tab_w + fin_w
+
+        # Glue tab + fin body
+        if mirror:
+            dwg.add(dwg.rect(insert=(x + fin_w, y), size=(tab_w, fin_h), fill=GLUE_TAB_FILL, stroke="none"))
+            add_rect(dwg, x, y, total_w, fin_h, CUT_STYLE)
+            dwg.add(dwg.line(start=(x + fin_w, y), end=(x + fin_w, y + fin_h), **VALLEY_STYLE))
+            # Diagonal cut to make fin tip
+            dwg.add(dwg.line(start=(x, y + fin_h), end=(x + fin_w, y), **CUT_STYLE))
+        else:
+            dwg.add(dwg.rect(insert=(x, y), size=(tab_w, fin_h), fill=GLUE_TAB_FILL, stroke="none"))
+            add_rect(dwg, x, y, total_w, fin_h, CUT_STYLE)
+            dwg.add(dwg.line(start=(x + tab_w, y), end=(x + tab_w, y + fin_h), **VALLEY_STYLE))
+            dwg.add(dwg.line(start=(x + tab_w, y), end=(x + total_w, y + fin_h), **CUT_STYLE))
+
+        dwg.add(dwg.text(label, insert=(x, y - 2), font_size="3.1px", font_family="Arial", fill="black"))
+
+    x_positions = [14.0, 72.0, 130.0]
+    y_positions = [36.0, 66.0]
+    idx = 1
+    for row, y in enumerate(y_positions):
+        for col, x in enumerate(x_positions):
+            mirror = (row + col) % 2 == 1
+            draw_fin(x, y, f"D{idx}", mirror=mirror)
+            idx += 1
+
+    # Placement map
+    dwg.add(dwg.text("PLACEMENT MAP", insert=(10, 112), font_size="4.0px", font_family="Arial", fill="black", font_weight="bold"))
+    dwg.add(dwg.text("LEFT WALL: D1, D3, D5 (top to bottom)", insert=(10, 119), font_size="3.4px", font_family="Arial", fill="black"))
+    dwg.add(dwg.text("RIGHT WALL: D2, D4, D6 (staggered vs LEFT)", insert=(10, 124), font_size="3.4px", font_family="Arial", fill="black"))
+    dwg.add(dwg.text("Fold angle target: 30–45° toward center channel.", insert=(10, 129), font_size="3.4px", font_family="Arial", fill="black"))
+    dwg.add(dwg.text("Keep center clear channel >= 30 mm.", insert=(10, 134), font_size="3.4px", font_family="Arial", fill="black"))
+
     add_common(dwg)
     dwg.save()
     return output
 
 
 def draw_sheet_06_instructions(cfg: SpecConfig) -> Path:
-    """Dedicated instruction sheet for ramp folding and assembly, optimized for print readability."""
+    """Dedicated instruction sheet for baffle-core folding and assembly."""
     output = get_svg_output_path("sheet_06_instructions.svg")
     dwg = create_drawing(output, "Sheet 06 - Assembly Instructions")
 
@@ -842,7 +918,7 @@ def draw_sheet_06_instructions(cfg: SpecConfig) -> Path:
         dwg.add(dwg.rect(insert=(box_x, y), size=(box_w, h), fill="none", stroke="#cccccc", stroke_width=0.4))
 
     # Header (wrapped)
-    dwg.add(dwg.text("NECROMANCER DICE TOWER — RAMP ASSEMBLY GUIDE", insert=(10, 14), font_size=heading_font, font_family="Arial", font_weight="bold", fill="black"))
+    dwg.add(dwg.text("NECROMANCER DICE TOWER — BAFFLE CORE GUIDE", insert=(10, 14), font_size=heading_font, font_family="Arial", font_weight="bold", fill="black"))
     draw_wrapped_text(
         dwg,
         text="Print at 100% on 200–300 gsm cardstock. Score all fold lines before folding.",
@@ -857,12 +933,12 @@ def draw_sheet_06_instructions(cfg: SpecConfig) -> Path:
     a_y = 32
     a_h = 52
     add_box(a_y, a_h)
-    dwg.add(dwg.text("A — HOW TO FOLD A RAMP", insert=(12, a_y + 7), font_size=heading_font, font_family="Arial", font_weight="bold", fill="#222222"))
+    dwg.add(dwg.text("A — PREPARE BULKHEADS (B1/B2)", insert=(12, a_y + 7), font_size=heading_font, font_family="Arial", font_weight="bold", fill="#222222"))
     a_lines = [
-        "1) CUT the ramp on black solid lines.",
-        "2) SCORE all BLUE dashed and RED dotted lines.",
-        "3) CUT & REMOVE all ORANGE notch triangles before folding.",
-        "4) FOLD in sequence: valley and mountain lines, then glue side tabs to walls.",
+        "1) CUT B1 and B2 on black solid lines.",
+        "2) SCORE BLUE lines and fold side glue tabs to 90°.",
+        "3) CUT the alternating windows exactly as printed.",
+        "4) Keep windows mirrored: B1 top-left, B2 top-right.",
     ]
     a_text = " ".join(a_lines)
     draw_wrapped_text(dwg, a_text, 12, a_y + 14, max_chars=92, line_height=line_h, font_size=body_font)
@@ -871,10 +947,10 @@ def draw_sheet_06_instructions(cfg: SpecConfig) -> Path:
     b_y = 88
     b_h = 38
     add_box(b_y, b_h)
-    dwg.add(dwg.text("B — WHY NOTCHES ARE REQUIRED", insert=(12, b_y + 7), font_size=heading_font, font_family="Arial", font_weight="bold", fill="#222222"))
+    dwg.add(dwg.text("B — WHY BAFFLES (ANTI-JAM)", insert=(12, b_y + 7), font_size=heading_font, font_family="Arial", font_weight="bold", fill="#222222"))
     draw_wrapped_text(
         dwg,
-        text="At each step fold, side-wall strips must bend cleanly to 90°. Without removing the notch triangles, paper bunches at the inner corner and the ramp cannot lie flat.",
+        text="Baffles increase random impacts while preserving a wider free channel than stepped ramps. Alternating openings plus staggered fins reduce jams and keep die flow stable.",
         x=12,
         y=b_y + 14,
         max_chars=92,
@@ -890,11 +966,11 @@ def draw_sheet_06_instructions(cfg: SpecConfig) -> Path:
     c_steps = [
         "1) Print all sheets at 100% (no fit-to-page).",
         "2) Score all fold lines before cutting.",
-        "3) Cut black lines and remove all orange notches on ramps.",
+        "3) Assemble body A + body B (Sheets 01-02) and keep seam open for insert steps.",
         "4) Assemble base tray (Sheet 05): F1-F4 valley, F5 mountain, glue corners.",
-        "5) Assemble body A + body B (Sheets 01-02).",
-        "6) Pre-fold and glue ramps C, then B, then A on matching anchors.",
-        "7) Attach base tray and run a d6 drop test.",
+        "5) Install B1 in upper zone and B2 below it with 25-30 mm gap; tabs glue to opposite walls.",
+        "6) Install D1-D6 fins on left/right walls, staggered, fold angle 30-45° toward center.",
+        "7) Close body seam, attach base tray, verify center channel >=30 mm, run d6 drop test.",
     ]
     draw_wrapped_text(dwg, " ".join(c_steps), 12, c_y + 14, max_chars=92, line_height=line_h, font_size=body_font)
 
@@ -902,18 +978,98 @@ def draw_sheet_06_instructions(cfg: SpecConfig) -> Path:
     d_y = 220
     d_h = 30
     add_box(d_y, d_h)
-    dwg.add(dwg.text("D — MATERIALS & TOOLS", insert=(12, d_y + 7), font_size=heading_font, font_family="Arial", font_weight="bold", fill="#222222"))
+    dwg.add(dwg.text("D — TEST CRITERIA", insert=(12, d_y + 7), font_size=heading_font, font_family="Arial", font_weight="bold", fill="#222222"))
     d_lines = [
-        "• Cardstock: 200-250 gsm recommended.",
-        "• Glue: PVA or glue stick (thin bead).",
-        "• Tools: bone folder, craft knife + metal ruler, scissors for small trims.",
-        "• Avoid hot glue for alignment-sensitive joints.",
+        "• Target pass: d6 >=95% exit, d20 >=90% exit, no persistent jam points.",
+        "• If jams occur, reduce fin angle or widen center lane before re-test.",
+        "• Keep glue beads thin and avoid spill in window/opening zones.",
+        "• Recommended cardstock: 200-250 gsm.",
     ]
     draw_wrapped_text(dwg, " ".join(d_lines), 12, d_y + 14, max_chars=92, line_height=line_h, font_size=body_font)
 
     # Reduced legend + fixed scale square
     add_legend(dwg, y=260, scale=0.58)
     add_scale_square(dwg)
+    dwg.save()
+    return output
+
+
+def draw_sheet_07_baffle_isometric(cfg: SpecConfig) -> Path:
+    """Isometric assembly reference for baffle fins and bulkheads (Sheet 07)."""
+    output = get_svg_output_path("sheet_07_baffle_isometric.svg")
+    dwg = create_drawing(output, "Sheet 07 - Baffle Core Isometric Guide")
+
+    # Header
+    dwg.add(dwg.text("v004 — 3D ISOMETRIC ASSEMBLY REFERENCE", insert=(10, 15), font_size="4.8px", font_family="Arial", fill="black", font_weight="bold"))
+    dwg.add(dwg.text("Visual guide: how to glue bulkheads B1/B2 and stagger fins D1..D6.", insert=(10, 21), font_size="3.2px", font_family="Arial", fill="black"))
+
+    # Isometric tower shell (simplified prism)
+    # Front face
+    front = [(40, 65), (115, 65), (115, 190), (40, 190)]
+    # Right face offset (isometric)
+    right = [(115, 65), (155, 85), (155, 210), (115, 190)]
+    # Top face
+    top = [(40, 65), (115, 65), (155, 85), (80, 85)]
+
+    dwg.add(dwg.polygon(points=front, fill="none", stroke="black", stroke_width=0.6))
+    dwg.add(dwg.polygon(points=right, fill="none", stroke="black", stroke_width=0.6))
+    dwg.add(dwg.polygon(points=top, fill="none", stroke="black", stroke_width=0.6))
+
+    # Internal bulkheads (semi-transparent look with light gray fill)
+    b1 = [(55, 95), (106, 95), (133, 108), (82, 108)]
+    b2 = [(58, 132), (109, 132), (136, 146), (85, 146)]
+    dwg.add(dwg.polygon(points=b1, fill="#f2f2f2", stroke="black", stroke_width=0.5))
+    dwg.add(dwg.polygon(points=b2, fill="#f2f2f2", stroke="black", stroke_width=0.5))
+
+    # Bulkhead windows (alternating)
+    dwg.add(dwg.polygon(points=[(63, 98), (76, 98), (101, 110), (88, 110)], fill="white", stroke="black", stroke_width=0.4))
+    dwg.add(dwg.polygon(points=[(86, 135), (99, 135), (124, 148), (111, 148)], fill="white", stroke="black", stroke_width=0.4))
+
+    # Deflector fins (orange) - staggered left/right
+    fins = [
+        [(52, 108), (61, 103), (61, 110)],
+        [(124, 118), (133, 122), (124, 126)],
+        [(54, 131), (63, 126), (63, 133)],
+        [(126, 142), (135, 146), (126, 150)],
+        [(56, 154), (65, 149), (65, 156)],
+        [(128, 166), (137, 170), (128, 174)],
+    ]
+    for fin in fins:
+        dwg.add(dwg.polygon(points=fin, fill=NOTCH_FILL, stroke="black", stroke_width=0.4))
+
+    # Flow arrow through chicane
+    flow_pts = [(66, 90), (92, 104), (79, 117), (106, 132), (92, 145), (118, 160), (104, 176)]
+    dwg.add(dwg.polyline(points=flow_pts, fill="none", stroke="#333333", stroke_width=0.8, stroke_dasharray="2,2"))
+    dwg.add(dwg.polygon(points=[(104, 176), (101, 173), (108, 172)], fill="#333333", stroke="none"))
+    dwg.add(dwg.text("DIE FLOW", insert=(108, 177), font_size="3.0px", font_family="Arial", fill="#333333"))
+
+    # Callouts
+    dwg.add(dwg.line(start=(85, 94), end=(168, 60), stroke="black", stroke_width=0.4))
+    dwg.add(dwg.text("B1 BULKHEAD (upper)", insert=(170, 60), font_size="3.2px", font_family="Arial", fill="black"))
+
+    dwg.add(dwg.line(start=(94, 132), end=(168, 86), stroke="black", stroke_width=0.4))
+    dwg.add(dwg.text("B2 BULKHEAD (lower)", insert=(170, 86), font_size="3.2px", font_family="Arial", fill="black"))
+
+    dwg.add(dwg.line(start=(129, 119), end=(168, 112), stroke="black", stroke_width=0.4))
+    dwg.add(dwg.text("D2/D4/D6 fins on RIGHT wall", insert=(170, 112), font_size="3.2px", font_family="Arial", fill="black"))
+
+    dwg.add(dwg.line(start=(61, 130), end=(168, 138), stroke="black", stroke_width=0.4))
+    dwg.add(dwg.text("D1/D3/D5 fins on LEFT wall", insert=(170, 138), font_size="3.2px", font_family="Arial", fill="black"))
+
+    # Angle and clearance notes
+    dwg.add(dwg.text("Fold fins toward center at 30–45°", insert=(10, 226), font_size="3.4px", font_family="Arial", fill="black"))
+    dwg.add(dwg.text("Keep central clear channel >= 30 mm", insert=(10, 231), font_size="3.4px", font_family="Arial", fill="black"))
+    dwg.add(dwg.text("Install B1 and B2 with vertical gap 25–30 mm", insert=(10, 236), font_size="3.4px", font_family="Arial", fill="black"))
+
+    # Mini fold exemplar for one fin
+    dwg.add(dwg.text("FIN FOLD EXAMPLE", insert=(10, 248), font_size="3.4px", font_family="Arial", fill="black", font_weight="bold"))
+    dwg.add(dwg.rect(insert=(10, 252), size=(22, 10), fill=GLUE_TAB_FILL, stroke="black", stroke_width=0.4))
+    dwg.add(dwg.line(start=(18, 252), end=(18, 262), **VALLEY_STYLE))
+    dwg.add(dwg.line(start=(18, 252), end=(32, 262), **CUT_STYLE))
+    dwg.add(dwg.text("BLUE = fold", insert=(36, 258), font_size="2.8px", font_family="Arial", fill="black"))
+    dwg.add(dwg.text("BLACK = cut", insert=(36, 262), font_size="2.8px", font_family="Arial", fill="black"))
+
+    add_common(dwg)
     dwg.save()
     return output
 
@@ -1042,6 +1198,7 @@ def main() -> None:
         lambda: draw_sheet_04_ramp_c(cfg),
         lambda: draw_sheet_05_base_tray(cfg),
         lambda: draw_sheet_06_instructions(cfg),
+        lambda: draw_sheet_07_baffle_isometric(cfg),
     ]:
         path = gen()
         print(f"Generated: {path}")

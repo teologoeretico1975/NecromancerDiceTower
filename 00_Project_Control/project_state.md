@@ -1,8 +1,26 @@
 # Project State — Necromancer Dice Tower
 
 ## Current Phase
-- **Phase:** v003 Single-Mode Refinement (Sheet 06 Readability Optimization)
-- **Status:** In progress (Sheet 06 refactored; dual-mode removed; single standard output streamlined)
+- **Phase:** v004 Baffle Core Migration (Anti-Jam Prototype)
+- **Status:** Technical templates updated and exported (7 sheets total, including Sheet 07 isometric reference)
+
+## Completed in Session 10 — Sheet 07 Isometric + External Graphics Prompt (2026-05-23)
+- Added new technical visualization sheet:
+  - [01_Technical_Template/svg/sheet_07_baffle_isometric.svg](01_Technical_Template/svg/sheet_07_baffle_isometric.svg)
+  - [01_Technical_Template/pdf/sheet_07_baffle_isometric.pdf](01_Technical_Template/pdf/sheet_07_baffle_isometric.pdf)
+- Updated automatic generation flow in [generate_dual_output.py](generate_dual_output.py) to include Sheet 07.
+- Added external graphics prompt reference file for DALL·E / Midjourney / SDXL:
+  - [00_Project_Control/prompts/sheet_07_external_graphics_prompt.md](00_Project_Control/prompts/sheet_07_external_graphics_prompt.md)
+- Verified successful SVG/PDF generation and export for updated technical set.
+
+## Completed in Session 9 — v004 Baffle Core Conversion (2026-05-23)
+- **Problem from physical prototype:** internal ramps reduced clearance and caused die jams.
+- **Implemented architecture change:** replaced ramp workflow with baffle core workflow.
+  - Sheet 03 repurposed to **B1/B2 bulkheads** (alternating mirrored windows)
+  - Sheet 04 repurposed to **D1..D6 deflector fins** (staggered wall placement)
+  - Sheet 06 instructions rewritten for baffle assembly and anti-jam QA
+- **New technical specification:** [01_Technical_Template/specs/technical_spec_v004_baffle_core.md](01_Technical_Template/specs/technical_spec_v004_baffle_core.md)
+- **Validation targets added:** center channel >= 30 mm, d6 >=95% exit, d20 >=90% exit
 
 ## Completed in Session 8 — Sheet 06 Optimization & Mode Simplification (2026-05-23)
 - **Problem**: Sheet 06 assembly instructions had critical readability issues:
@@ -52,20 +70,21 @@
   - **Reduced cognitive overload**: Removed duplicate explanation text in Beginner ramps (now centralized in fold guide)
 
 ## Validation State
-- All 6 standard SVG sheets PASS syntax validation ✓
-- PDFs: 6 technical sheets generated successfully ✓
+- All 7 standard SVG sheets PASS syntax validation ✓
+- PDFs: 7 technical sheets generated successfully ✓
 - Sheet 06: No text overflow, sections A-D align within A4 bounds ✓
+- Sheet 07: Isometric baffle-core references and callouts generated correctly ✓
 - Typography: Consistent 3.0px (body) / 3.6px (standard) / 4.6px (heading) sizing ✓
 - Legend: Repositioned y=260, scaled 0.58 ✓
 
 ## Deliverables (Current)
-- **SVG templates** (6 standard sheets): all files in [01_Technical_Template/svg/](01_Technical_Template/svg/)
-- **PDF documents** (6 standard sheets): all files in [01_Technical_Template/pdf/](01_Technical_Template/pdf/)
+- **SVG templates** (7 standard sheets): all files in [01_Technical_Template/svg/](01_Technical_Template/svg/)
+- **PDF documents** (7 standard sheets): all files in [01_Technical_Template/pdf/](01_Technical_Template/pdf/)
 - **Python code** (agent_02b_svg_generator.py): Single-mode output, removed dual-mode complexity
 - **Documentation**: Project state updated (this file); changelog in [changelog.md](changelog.md)
 
 ## Next Action (Pending)
-1. **Physical build test** with all 6 updated technical sheets (verify assembly clarity)
+1. **Physical build test** with all 7 updated technical sheets (verify baffle flow + assembly clarity)
 2. **Art direction phase** — move to decorative artwork layer (motifs, color palette, branding)
 3. **PDF asset pack preparation** — organize final deliverables for Etsy listing
 

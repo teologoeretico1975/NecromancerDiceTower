@@ -71,8 +71,8 @@ Refer to `DUAL_MODE_GUIDE.md` for complete output guide and usage recommendation
 
 | ID | Component | Qty | Approx. Flat Size (mm) | Beginner-Mode Notes |
 |---|---|---|---|---|
-| A | Tower wall panel (front, with dice mouth) | 1 | 65 × 190 | Standard layout (no change) |
-| B | Tower wall panel (back, with exit window) | 1 | 65 × 190 | Standard layout (no change) |
+| A | Tower wall panel (front, with dice mouth + exit arch) | 1 | 65 × 190 | Standard layout (no change) |
+| B | Tower wall panel (back) | 1 | 65 × 190 | Standard layout (no change) |
 | C | Tower side wall panel | 2 | 65 × 190 | Standard layout (no change) |
 | D | Crenellated top ring (4 strips) | 4 | 70 × 15 | Standard layout (no change) |
 | E | Tower roof / cap (optional, open or closed) | 1 | 65 × 65 | Standard layout (no change) |
@@ -240,7 +240,7 @@ Additional disambiguation rule:
 4. **Install ramps F, G, H** onto their marked interior wall zones **before closing the tower shaft**. This is critical — ramps cannot be installed once the box is closed.
    - Glue ramp F (RAMP A) to wall C (left interior), upper position.
    - Glue ramp G (RAMP B) to wall C (right interior), middle position.
-   - Glue ramp H (RAMP C) to wall B (back interior), lower position, angled toward exit window.
+  - Glue ramp H (RAMP C) to wall B (back interior), lower position, angled toward front exit arch.
    - **Beginner Mode:** Use the 1-2-3 fold guide from Sheet 03 to correctly fold each ramp before attaching.
 5. **Close the tower shaft**: fold the wall strip into a square section and glue the final seam tab.
 6. **Attach crenellation strips D** to the top edge of the four walls.
@@ -264,13 +264,13 @@ Additional disambiguation rule:
 - Supports dice up to and including standard d20 (≈20 mm) and oversized d20 up to 25 mm.
 - Located on front wall A, centered horizontally, with top edge 20 mm below crenellation base.
 
-### 6.2 Dice Exit (Bottom Rear, Back Panel B)
+### 6.2 Dice Exit (Bottom Front, Front Panel A)
 
 - Exit window shape: low gothic arch.
 - Internal clear opening: **45 mm wide × 22 mm tall**.
-- Bottom edge of exit aligned flush with tower base (height 0 mm relative to tray floor).
-- Exit faces into the catch tray interior.
-- Lower ramp H (RAMP C) directs dice through this opening.
+- Exit arch is centered on the FRONT panel (Sheet 01).
+- Arch sill is positioned **12 mm above panel bottom edge** in the current technical template.
+- Lower ramp H (RAMP C) directs dice toward this opening.
 
 ### 6.3 Internal Clearance
 
@@ -471,7 +471,7 @@ Additional disambiguation rule:
 4. **Install ramps F, G, H** onto their marked interior wall zones **before closing the tower shaft**. This is critical — ramps cannot be installed once the box is closed.
    - Glue ramp F to wall C (left interior), upper position.
    - Glue ramp G to wall C (right interior), middle position.
-   - Glue ramp H to wall B (back interior), lower position, angled toward exit window.
+  - Glue ramp H to wall B (back interior), lower position, angled toward front exit arch.
 5. **Close the tower shaft**: fold the wall strip into a square section and glue the final seam tab.
 6. **Attach crenellation strips D** to the top edge of the four walls.
 7. **(Optional) Attach roof cap E.** Leaving it open is acceptable and recommended for v1 testing.
@@ -494,13 +494,13 @@ Additional disambiguation rule:
 - Supports dice up to and including standard d20 (≈20 mm) and oversized d20 up to 25 mm.
 - Located on front wall A, centered horizontally, with top edge 20 mm below crenellation base.
 
-### 6.2 Dice Exit (Bottom Rear, Back Panel B)
+### 6.2 Dice Exit (Bottom Front, Front Panel A)
 
 - Exit window shape: low gothic arch.
 - Internal clear opening: **45 mm wide × 22 mm tall**.
-- Bottom edge of exit aligned flush with tower base (height 0 mm relative to tray floor).
-- Exit faces into the catch tray interior.
-- Lower ramp H directs dice through this opening.
+- Exit arch is centered on the FRONT panel (Sheet 01).
+- Arch sill is positioned **12 mm above panel bottom edge** in the current technical template.
+- Lower ramp H directs dice toward this opening.
 
 ### 6.3 Internal Clearance
 

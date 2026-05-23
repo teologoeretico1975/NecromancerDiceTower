@@ -1,5 +1,45 @@
 # Changelog
 
+## 2026-05-23 (Session 10 — Sheet 07 Isometric + Prompt Workflow)
+
+### Added
+
+- New technical reference sheet:
+  - [01_Technical_Template/svg/sheet_07_baffle_isometric.svg](01_Technical_Template/svg/sheet_07_baffle_isometric.svg)
+  - [01_Technical_Template/pdf/sheet_07_baffle_isometric.pdf](01_Technical_Template/pdf/sheet_07_baffle_isometric.pdf)
+- New external graphics prompt file:
+  - [00_Project_Control/prompts/sheet_07_external_graphics_prompt.md](00_Project_Control/prompts/sheet_07_external_graphics_prompt.md)
+
+### Updated
+
+- Batch generation script [generate_dual_output.py](generate_dual_output.py) now includes Sheet 07 in the generated set.
+- Generator [agent_02b_svg_generator.py](agent_02b_svg_generator.py) extended with `draw_sheet_07_baffle_isometric(...)` and integrated in main generation flow.
+
+### Validation
+
+- Sheet 07 SVG generation completed successfully.
+- Sheet 07 PDF export completed successfully.
+- Existing technical exports remain valid under v004 baffle-core workflow.
+
+## 2026-05-23 (Session 9 — v004 Baffle Core Migration)
+
+### Major Change
+
+- Replaced ramp-based internal randomization with **Baffle Core** structures after physical prototype jam feedback.
+- Added new spec: [01_Technical_Template/specs/technical_spec_v004_baffle_core.md](01_Technical_Template/specs/technical_spec_v004_baffle_core.md).
+
+### Updated Sheets
+
+- Sheet 03 (`sheet_03_ramps_ab.svg`) repurposed to **B1/B2 bulkheads** with mirrored alternating windows.
+- Sheet 04 (`sheet_04_ramp_c.svg`) repurposed to **D1..D6 deflector fins** with staggered placement map.
+- Sheet 06 (`sheet_06_instructions.svg`) rewritten from ramp assembly to baffle-core assembly + anti-jam test criteria.
+
+### Validation Targets (v004)
+
+- Center free channel >= 30 mm
+- d6 exit success >= 95%
+- d20 exit success >= 90%
+
 ## 2026-05-23 (Session 8 — Dual-Mode Removal & Single-Mode Finalization)
 
 ### Major Refactor

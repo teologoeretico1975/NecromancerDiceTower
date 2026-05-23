@@ -10,6 +10,7 @@ from agent_02b_svg_generator import (
     draw_sheet_04_ramp_c,
     draw_sheet_05_base_tray,
     draw_sheet_06_instructions,
+    draw_sheet_07_baffle_isometric,
     SVG_DIR,
 )
 
@@ -26,6 +27,7 @@ def generate_all_modes():
         ("Sheet 04 (Ramp C)", draw_sheet_04_ramp_c),
         ("Sheet 05 (Base Tray)", draw_sheet_05_base_tray),
         ("Sheet 06 (Instructions)", draw_sheet_06_instructions),
+        ("Sheet 07 (Baffle Isometric)", draw_sheet_07_baffle_isometric),
     ]
 
     print("\n=== Generating STANDARD mode ===")

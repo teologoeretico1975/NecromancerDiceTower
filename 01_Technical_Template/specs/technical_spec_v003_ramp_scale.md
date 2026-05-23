@@ -158,6 +158,10 @@ They are not optional cosmetic edits: they must be preserved by the regeneration
   - left side labels: `rotate(-90)`
   - right side labels: `rotate(90)`
 3. `FOLD GUIDE` must be generated as a **multiline block** (title + 3 lines), not a single long line.
+4. Sheet 01 `FRONT` panel must include the dice exit cutout as a **low gothic arch**:
+  - clear opening: **45 mm × 22 mm**
+  - centered on the FRONT panel width
+  - arch sill at **12 mm above panel bottom edge**
 
 ### Sheet 03 (Ramps A/B)
 
