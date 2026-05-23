@@ -146,6 +146,44 @@ Note: Beginner-mode fold diagram on Sheet 03 is removed; all guidance centralise
 
 ---
 
+## Layout Lock Constraints (from Manual Readability Iteration)
+
+The following are **mandatory generation constraints** derived from manually improved SVGs.
+They are not optional cosmetic edits: they must be preserved by the regeneration algorithm.
+
+### Sheet 01 / Sheet 02 (Body Panels)
+
+1. Fold IDs near top edges (`F1`, `F2`) must be **vertical** (`rotate(-90)`) to keep the top instruction band clear.
+2. Anchor labels (`A-L`, `A-R`, `B-L`, `B-R`, `C-L`, `C-R`) must be rendered as **vertical side labels**:
+  - left side labels: `rotate(-90)`
+  - right side labels: `rotate(90)`
+3. `FOLD GUIDE` must be generated as a **multiline block** (title + 3 lines), not a single long line.
+
+### Sheet 03 (Ramps A/B)
+
+1. Use a **staggered layout** to avoid callout collisions:
+  - Ramp A in upper-left zone
+  - Ramp B in lower-right zone
+2. Keep per-ramp explanatory callouts (`OUTER BLUE...`, `INNER BLUE...`, `ORANGE triangles...`) at reduced visual scale (about 80%) to preserve bottom legend clearance.
+
+### Sheet 04 (Ramp C)
+
+1. Ramp C text+net block must be placed lower than top header zone (manual profile), keeping clear white space under title/subtitle.
+2. Explanatory callouts under ramp must use reduced scale (about 80%) to avoid overlap with legend.
+
+### Sheet 05 (Base Tray)
+
+1. Tray geometry/text cluster uses a shifted placement profile (manual readability offset), preserving an uncluttered top text band.
+2. Micro-labels (`L - FRONT LIP`, `GLUE FLAP ...`) use smaller font (~2.88 px) to prevent spillover.
+
+### Sheet 06 (Instructions)
+
+1. Long explanatory text must use **algorithmic wrapping** (line splitting by max characters) for stable readability.
+2. Section C and D lines must be wrapped and bounded to avoid collisions with legend and scale square.
+3. Horizontal separators between sections are part of the required readability layout.
+
+---
+
 ## Machine-Readable Override Values (parser target)
 
 The following table uses exact format expected by the SVG generator.
@@ -167,3 +205,4 @@ These values override v001/v002 equivalents.
 ## Document History
 
 - **v003.0 (2026-05-23):** Enlarged ramp geometry, added mandatory 45° notch cuts, moved all assembly instructions to Sheet 06.
+- **v003.1 (2026-05-23):** Added locked text/layout constraints from manual readability edits (rotations, multiline blocks, wrapped text, staggered ramp text placement).

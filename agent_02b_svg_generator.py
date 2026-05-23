@@ -32,16 +32,17 @@ GLUE_TAB_FILL = "#e6e6e6"
 NOTCH_FILL = "#FF6600"  # Orange – relief notch triangles: CUT & REMOVE
 TEXT_STYLE = {"font_size": "3.6px", "font_family": "Arial", "fill": "black"}
 
+BOTTOM_NOTE_TEXT = "NOTE: If BLUE touches BLACK edge, treat it as FOLD line."
+BOTTOM_NOTE_Y = 251.8
+
 ROOT_DIR = Path(__file__).resolve().parent
 SPECS_DIR = ROOT_DIR / "01_Technical_Template" / "specs"
 SVG_DIR = ROOT_DIR / "01_Technical_Template" / "svg"
 
 
-def get_svg_output_path(cfg: SpecConfig, base_name: str) -> Path:
-    """Construct SVG output path with mode suffix (e.g., _beginner)."""
-    if cfg.output_mode == "beginner":
-        name_without_ext = base_name.replace(".svg", "")
-        return SVG_DIR / f"{name_without_ext}_beginner.svg"
+def get_svg_output_path(base_name: str) -> Path:
+    """Construct SVG output path for standard technical output."""
+    return SVG_DIR / base_name
     return SVG_DIR / base_name
 
 
@@ -49,9 +50,6 @@ class SpecConfig:
     """Merged technical config from all markdown specs in specs/ directory."""
 
     def __init__(self) -> None:
-        # Output mode: "standard" (compact), "beginner" (extra guidance)
-        self.output_mode = "standard"
-
         # v001 defaults
         self.front_w = 65.0
         self.side_w = 65.0
@@ -263,6 +261,10 @@ def mm(value: float) -> str:
     return f"{value}mm"
 
 
+def scaled_px(base_px: float, scale: float = 1.0) -> str:
+    return f"{base_px * scale:.2f}px"
+
+
 def create_drawing(output_path: Path, title: str) -> svgwrite.Drawing:
     dwg = svgwrite.Drawing(
         filename=str(output_path),
@@ -286,23 +288,42 @@ def add_scale_square(dwg: svgwrite.Drawing) -> None:
     dwg.add(dwg.text("20 x 20 mm", insert=(x - 18, y + 24), **TEXT_STYLE))
 
 
-def add_legend(dwg: svgwrite.Drawing) -> None:
-    lx, ly = 10, A4_HEIGHT_MM - 38
-    dwg.add(dwg.text("LEGEND", insert=(lx, ly), **TEXT_STYLE))
-    dwg.add(dwg.line(start=(lx, ly + 4), end=(lx + 18, ly + 4), **CUT_STYLE))
-    dwg.add(dwg.text("CUT", insert=(lx + 21, ly + 5), **TEXT_STYLE))
-    dwg.add(dwg.line(start=(lx, ly + 10), end=(lx + 18, ly + 10), **VALLEY_STYLE))
-    dwg.add(dwg.text("VALLEY FOLD", insert=(lx + 21, ly + 11), **TEXT_STYLE))
-    dwg.add(dwg.line(start=(lx, ly + 16), end=(lx + 18, ly + 16), **MOUNTAIN_STYLE))
-    dwg.add(dwg.text("MOUNTAIN FOLD", insert=(lx + 21, ly + 17), **TEXT_STYLE))
-    dwg.add(dwg.rect(insert=(lx, ly + 20), size=(18, 6), fill=GLUE_TAB_FILL, stroke="none"))
-    dwg.add(dwg.text("GLUE TAB", insert=(lx + 21, ly + 25), **TEXT_STYLE))
-    # Notch legend entry
+def add_legend(
+    dwg: svgwrite.Drawing,
+    x: float = 10,
+    y: float | None = None,
+    scale: float = 1.0,
+) -> None:
+    lx = x
+    ly = A4_HEIGHT_MM - 38 if y is None else y
+    font_size = scaled_px(3.6, scale)
+    line_w = 18 * scale
+    text_dx = 21 * scale
+    row_1 = 4 * scale
+    row_2 = 10 * scale
+    row_3 = 16 * scale
+    row_4 = 20 * scale
+    row_5 = 25 * scale
+    row_6 = 28 * scale
+    row_7 = 33 * scale
+    glue_h = 6 * scale
+
+    dwg.add(dwg.text("LEGEND", insert=(lx, ly), font_size=font_size, font_family="Arial", fill="black"))
+    dwg.add(dwg.line(start=(lx, ly + row_1), end=(lx + line_w, ly + row_1), **CUT_STYLE))
+    dwg.add(dwg.text("CUT", insert=(lx + text_dx, ly + row_1 + scale), font_size=font_size, font_family="Arial", fill="black"))
+    dwg.add(dwg.line(start=(lx, ly + row_2), end=(lx + line_w, ly + row_2), **VALLEY_STYLE))
+    dwg.add(dwg.text("VALLEY FOLD", insert=(lx + text_dx, ly + row_2 + scale), font_size=font_size, font_family="Arial", fill="black"))
+    dwg.add(dwg.line(start=(lx, ly + row_3), end=(lx + line_w, ly + row_3), **MOUNTAIN_STYLE))
+    dwg.add(dwg.text("MOUNTAIN FOLD", insert=(lx + text_dx, ly + row_3 + scale), font_size=font_size, font_family="Arial", fill="black"))
+    dwg.add(dwg.rect(insert=(lx, ly + row_4), size=(line_w, glue_h), fill=GLUE_TAB_FILL, stroke="none"))
+    dwg.add(dwg.text("GLUE TAB", insert=(lx + text_dx, ly + row_5), font_size=font_size, font_family="Arial", fill="black"))
     dwg.add(dwg.polygon(
-        points=[(lx, ly + 28), (lx + 18, ly + 28), (lx, ly + 34)],
-        fill=NOTCH_FILL, stroke="black", stroke_width=0.4
+        points=[(lx, ly + row_6), (lx + line_w, ly + row_6), (lx, ly + row_6 + glue_h)],
+        fill=NOTCH_FILL,
+        stroke="black",
+        stroke_width=0.4 * scale,
     ))
-    dwg.add(dwg.text("NOTCH – CUT & REMOVE", insert=(lx + 21, ly + 33), **TEXT_STYLE))
+    dwg.add(dwg.text("NOTCH – CUT & REMOVE", insert=(lx + text_dx, ly + row_7), font_size=font_size, font_family="Arial", fill="black"))
 
 
 def add_common(dwg: svgwrite.Drawing) -> None:
@@ -310,9 +331,93 @@ def add_common(dwg: svgwrite.Drawing) -> None:
     add_scale_square(dwg)
 
 
-def draw_anchor_tick(dwg: svgwrite.Drawing, x: float, y: float, label: str) -> None:
+def add_bottom_note(
+    dwg: svgwrite.Drawing,
+    y: float = BOTTOM_NOTE_Y,
+    scale: float = 1.0,
+    x: float = 10,
+) -> None:
+    dwg.add(
+        dwg.text(
+            BOTTOM_NOTE_TEXT,
+            insert=(x, y),
+            font_size=scaled_px(3.6, scale),
+            font_family="Arial",
+            fill="black",
+        )
+    )
+
+
+def add_centered_panel_label(
+    dwg: svgwrite.Drawing,
+    label: str,
+    panel_x: float,
+    panel_y: float,
+    panel_w: float,
+    panel_h: float,
+) -> None:
+    dwg.add(
+        dwg.text(
+            label,
+            insert=(panel_x + panel_w / 2, panel_y + panel_h / 2),
+            text_anchor="middle",
+            dominant_baseline="middle",
+            **TEXT_STYLE,
+        )
+    )
+
+
+def draw_text_block(
+    dwg: svgwrite.Drawing,
+    x: float,
+    y: float,
+    lines: list[str],
+    line_height: float = 4.2,
+    font_size: str = "3.6px",
+) -> None:
+    for idx, line in enumerate(lines):
+        dwg.add(dwg.text(line, insert=(x, y + idx * line_height), font_size=font_size, font_family="Arial", fill="black"))
+
+
+def draw_wrapped_text(
+    dwg: svgwrite.Drawing,
+    text: str,
+    x: float,
+    y: float,
+    max_chars: int,
+    line_height: float = 4.2,
+    font_size: str = "3.6px",
+) -> float:
+    words = text.split()
+    lines: list[str] = []
+    cur = ""
+    for word in words:
+        candidate = f"{cur} {word}".strip()
+        if len(candidate) <= max_chars:
+            cur = candidate
+        else:
+            if cur:
+                lines.append(cur)
+            cur = word
+    if cur:
+        lines.append(cur)
+
+    for idx, line in enumerate(lines):
+        dwg.add(dwg.text(line, insert=(x, y + idx * line_height), font_size=font_size, font_family="Arial", fill="black"))
+
+    return y + max(0, len(lines) - 1) * line_height
+
+
+def draw_anchor_tick(dwg: svgwrite.Drawing, x: float, y: float, label: str, side: str = "left") -> None:
     dwg.add(dwg.line(start=(x - 4, y), end=(x + 4, y), **VALLEY_STYLE))
-    dwg.add(dwg.text(label, insert=(x + 5, y + 1.5), **TEXT_STYLE))
+    if side == "left":
+        # Vertical (rotated) labels along left guide edge for readability.
+        tx, ty = (x + 8.7, y + 1.4)
+        dwg.add(dwg.text(label, insert=(tx, ty), transform=f"rotate(-90 {tx} {ty})", **TEXT_STYLE))
+    else:
+        # Vertical (rotated) labels along right guide edge for readability.
+        tx, ty = (x - 5.1, y + 1.4)
+        dwg.add(dwg.text(label, insert=(tx, ty), transform=f"rotate(90 {tx} {ty})", **TEXT_STYLE))
 
 
 def add_rotated_tab_label(
@@ -365,7 +470,7 @@ def draw_ramp_3d_example(dwg: svgwrite.Drawing, x: float, y: float) -> None:
 
 
 def draw_ramp_fold_sequence(dwg: svgwrite.Drawing, x: float, y: float) -> None:
-    """Draw 1-2-3 visual sequence LARGE and CLEAR: flat, first fold, glued. For Beginner mode.
+    """Draw 1-2-3 visual sequence LARGE and CLEAR: flat, first fold, glued.
     
     This is the PRIMARY guide, not cramped in a corner. Sized to be readable by kids.
     """
@@ -463,7 +568,7 @@ def draw_fold_callout(dwg: svgwrite.Drawing, x: float, y: float, text: str, side
 
 
 def draw_sheet_01_body_a(cfg: SpecConfig) -> Path:
-    output = get_svg_output_path(cfg, "sheet_01_body_a.svg")
+    output = get_svg_output_path("sheet_01_body_a.svg")
     dwg = create_drawing(output, "Sheet 01 - Body Part A")
     x0, y0, h = 20, 30, cfg.panel_h
     tab_w, front_w, left_w = cfg.glue_tab_a, cfg.front_w, cfg.side_w
@@ -471,11 +576,14 @@ def draw_sheet_01_body_a(cfg: SpecConfig) -> Path:
     add_rect(dwg, x0, y0, tab_w + front_w + left_w, h, CUT_STYLE)
     dwg.add(dwg.line(start=(x0 + tab_w, y0), end=(x0 + tab_w, y0 + h), **VALLEY_STYLE))
     dwg.add(dwg.line(start=(x0 + tab_w + front_w, y0), end=(x0 + tab_w + front_w, y0 + h), **VALLEY_STYLE))
-    dwg.add(dwg.text("F1", insert=(x0 + tab_w + 1.2, y0 + 8), **TEXT_STYLE))
-    dwg.add(dwg.text("F2", insert=(x0 + tab_w + front_w + 1.2, y0 + 8), **TEXT_STYLE))
+    # Fold IDs vertical to avoid collisions with top guidance text.
+    f1x, f1y = (x0 + tab_w + 4.4, y0 + 9.0)
+    f2x, f2y = (x0 + tab_w + front_w + 4.4, y0 + 9.0)
+    dwg.add(dwg.text("F1", insert=(f1x, f1y), transform=f"rotate(-90 {f1x} {f1y})", **TEXT_STYLE))
+    dwg.add(dwg.text("F2", insert=(f2x, f2y), transform=f"rotate(-90 {f2x} {f2y})", **TEXT_STYLE))
     add_rotated_tab_label(dwg, "GLUE TAB", x0 + tab_w / 2, y0 + h / 2, -90)
-    dwg.add(dwg.text("FRONT", insert=(x0 + tab_w + 23, y0 + 95), **TEXT_STYLE))
-    dwg.add(dwg.text("LEFT SIDE", insert=(x0 + tab_w + front_w + 18, y0 + 95), **TEXT_STYLE))
+    add_centered_panel_label(dwg, "FRONT", x0 + tab_w, y0, front_w, h)
+    add_centered_panel_label(dwg, "LEFT SIDE", x0 + tab_w + front_w, y0, left_w, h)
 
     if cfg.use_v002_ramp_rules:
         # v002 requires short anchor ticks instead of long full guide lines.
@@ -493,11 +601,22 @@ def draw_sheet_01_body_a(cfg: SpecConfig) -> Path:
         for label, y_from_bottom in anchor_map:
             y = bottom_y - y_from_bottom
             x = panel_left_x if label.endswith("-L") else panel_right_x
-            draw_anchor_tick(dwg, x, y, f"{label} {int(y_from_bottom)}mm")
+            draw_anchor_tick(dwg, x, y, f"{label} {int(y_from_bottom)}mm", side="left" if label.endswith("-L") else "right")
 
-    dwg.add(dwg.text("FOLD GUIDE: 1) SCORE BLUE DASHED lines (F1/F2).", insert=(10, 22), **TEXT_STYLE))
-    dwg.add(dwg.text("2) FOLD F1/F2 inward to 90°.  3) BLACK SOLID lines = CUT ONLY.", insert=(10, 26), **TEXT_STYLE))
-    dwg.add(dwg.text("NOTE: If BLUE touches BLACK edge, treat it as FOLD line.", insert=(10, 258), **TEXT_STYLE))
+    dwg.add(dwg.text("FOLD GUIDE:", insert=(10, 16.8), **TEXT_STYLE))
+    draw_text_block(
+        dwg,
+        x=35.8,
+        y=16.7,
+        lines=[
+            "1) SCORE BLUE DASHED lines (F1/F2).",
+            "2) FOLD F1/F2 inward to 90°.",
+            "3) BLACK SOLID lines = CUT ONLY.",
+        ],
+        line_height=4.2,
+        font_size="3.38px",
+    )
+    add_bottom_note(dwg)
 
     add_common(dwg)
     dwg.save()
@@ -505,7 +624,7 @@ def draw_sheet_01_body_a(cfg: SpecConfig) -> Path:
 
 
 def draw_sheet_02_body_b(cfg: SpecConfig) -> Path:
-    output = get_svg_output_path(cfg, "sheet_02_body_b.svg")
+    output = get_svg_output_path("sheet_02_body_b.svg")
     dwg = create_drawing(output, "Sheet 02 - Body Part B")
     x0, y0, h = 20, 30, cfg.panel_h
     tab_a_w, back_w, right_w, tab_b_w = cfg.glue_tab_a, cfg.back_w, cfg.side_w, cfg.glue_tab_b
@@ -516,12 +635,15 @@ def draw_sheet_02_body_b(cfg: SpecConfig) -> Path:
     dwg.add(dwg.line(start=(x0 + tab_a_w, y0), end=(x0 + tab_a_w, y0 + h), **VALLEY_STYLE))
     dwg.add(dwg.line(start=(x0 + tab_a_w + back_w, y0), end=(x0 + tab_a_w + back_w, y0 + h), **VALLEY_STYLE))
     dwg.add(dwg.line(start=(x0 + tab_a_w + back_w + right_w, y0), end=(x0 + tab_a_w + back_w + right_w, y0 + h), **VALLEY_STYLE))
-    dwg.add(dwg.text("F1", insert=(x0 + tab_a_w + 1.2, y0 + 8), **TEXT_STYLE))
-    dwg.add(dwg.text("F2", insert=(x0 + tab_a_w + back_w + 1.2, y0 + 8), **TEXT_STYLE))
-    dwg.add(dwg.text("F3", insert=(x0 + tab_a_w + back_w + right_w + 1.2, y0 + 8), **TEXT_STYLE))
+    # Fold IDs vertical to keep top band clear.
+    f1x, f1y = (x0 + tab_a_w + 4.4, y0 + 9.0)
+    f2x, f2y = (x0 + tab_a_w + back_w + 4.4, y0 + 9.0)
+    dwg.add(dwg.text("F1", insert=(f1x, f1y), transform=f"rotate(-90 {f1x} {f1y})", **TEXT_STYLE))
+    dwg.add(dwg.text("F2", insert=(f2x, f2y), transform=f"rotate(-90 {f2x} {f2y})", **TEXT_STYLE))
+    dwg.add(dwg.text("F3", insert=(x0 + tab_a_w + back_w + right_w + 1.6, y0 + 9.0), **TEXT_STYLE))
     add_rotated_tab_label(dwg, "GLUE TAB A", x0 + tab_a_w / 2, y0 + h / 2, -90)
-    dwg.add(dwg.text("BACK", insert=(x0 + tab_a_w + 25, y0 + 95), **TEXT_STYLE))
-    dwg.add(dwg.text("RIGHT SIDE", insert=(x0 + tab_a_w + back_w + 14, y0 + 95), **TEXT_STYLE))
+    add_centered_panel_label(dwg, "BACK", x0 + tab_a_w, y0, back_w, h)
+    add_centered_panel_label(dwg, "RIGHT SIDE", x0 + tab_a_w + back_w, y0, right_w, h)
     add_rotated_tab_label(
         dwg,
         "GLUE TAB B",
@@ -545,11 +667,22 @@ def draw_sheet_02_body_b(cfg: SpecConfig) -> Path:
         for label, y_from_bottom in anchor_map:
             y = bottom_y - y_from_bottom
             x = panel_left_x if label.endswith("-L") else panel_right_x
-            draw_anchor_tick(dwg, x, y, f"{label} {int(y_from_bottom)}mm")
+            draw_anchor_tick(dwg, x, y, f"{label} {int(y_from_bottom)}mm", side="left" if label.endswith("-L") else "right")
 
-    dwg.add(dwg.text("FOLD GUIDE: 1) SCORE BLUE DASHED lines (F1/F2/F3).", insert=(10, 22), **TEXT_STYLE))
-    dwg.add(dwg.text("2) FOLD F1/F2/F3 inward to 90°.  3) BLACK SOLID lines = CUT ONLY.", insert=(10, 26), **TEXT_STYLE))
-    dwg.add(dwg.text("NOTE: If BLUE touches BLACK edge, treat it as FOLD line.", insert=(10, 258), **TEXT_STYLE))
+    dwg.add(dwg.text("FOLD GUIDE:", insert=(9.4, 15.2), **TEXT_STYLE))
+    draw_text_block(
+        dwg,
+        x=35.0,
+        y=15.2,
+        lines=[
+            "1) SCORE BLUE DASHED lines (F1/F2/F3).",
+            "2) FOLD F1/F2/F3 inward to 90°.",
+            "3) BLACK SOLID lines = CUT ONLY.",
+        ],
+        line_height=4.2,
+        font_size="3.38px",
+    )
+    add_bottom_note(dwg)
 
     add_common(dwg)
     dwg.save()
@@ -563,6 +696,7 @@ def draw_ramp(
     y0: float,
     label: str,
     flow_direction: str = "L->R",
+    callout_scale: float = 1.0,
 ) -> None:
     body_w, body_l = cfg.ramp_width, cfg.ramp_length
     tab_side, tab_back = cfg.side_tab, cfg.back_tab
@@ -638,270 +772,157 @@ def draw_ramp(
                 fill=NOTCH_FILL, stroke="black", stroke_width=0.3
             ))
 
-        # Minimal geometry hints (both modes)
-        dwg.add(dwg.text("OUTER BLUE vertical = TAB fold", insert=(x0 + tab_side + 1, y0 + body_l + 7), **TEXT_STYLE))
+        # Minimal geometry hints with controllable scale to avoid overlaps in dense layouts.
+        hint_font = f"{3.6 * callout_scale:.2f}px"
+        hint_line = 5.0 * callout_scale
+        hint_y0 = y0 + body_l + 7
+        dwg.add(dwg.text("OUTER BLUE vertical = TAB fold", insert=(x0 + tab_side + 1, hint_y0), font_size=hint_font, font_family="Arial", fill="black"))
         dwg.add(
             dwg.text(
                 f"INNER BLUE vertical = SIDE-WALL fold ({int(cfg.side_wall_h)}mm)",
-                insert=(x0 + tab_side + 1, y0 + body_l + 12),
-                **TEXT_STYLE,
+                insert=(x0 + tab_side + 1, hint_y0 + hint_line),
+                font_size=hint_font,
+                font_family="Arial",
+                fill="black",
             )
         )
-        dwg.add(dwg.text("ORANGE triangles = NOTCH: CUT & REMOVE before folding", insert=(x0 + tab_side + 1, y0 + body_l + 17), **TEXT_STYLE))
+        dwg.add(dwg.text("ORANGE triangles = NOTCH: CUT & REMOVE before folding", insert=(x0 + tab_side + 1, hint_y0 + 2 * hint_line), font_size=hint_font, font_family="Arial", fill="black"))
     else:
         dwg.add(dwg.text(label, insert=(x0 + tab_side + 20, y0 + 36), **TEXT_STYLE))
 
 
 def draw_sheet_03_ramps_ab(cfg: SpecConfig) -> Path:
-    output = get_svg_output_path(cfg, "sheet_03_ramps_ab.svg")
+    output = get_svg_output_path("sheet_03_ramps_ab.svg")
     dwg = create_drawing(output, "Sheet 03 - Ramps A and B")
     dwg.add(dwg.text("v003 — RAMPS A and B", insert=(10, 14), font_size="5px", font_family="Arial", font_weight="bold", fill="black"))
     dwg.add(dwg.text(
         f"Pitch p={int(cfg.tread)}mm  rise h={cfg.rise:.1f}mm  modules={cfg.modules}  wall={int(cfg.side_wall_h)}mm  See Sheet 06 for full instructions.",
         insert=(10, 20), **TEXT_STYLE,
     ))
-    dwg.add(dwg.text("RAMP A:  L → R (HIGH side at back tab)", insert=(10, 27), **TEXT_STYLE))
-    dwg.add(dwg.text("RAMP B:  R ← L (HIGH side at back tab)", insert=(105, 27), **TEXT_STYLE))
-    draw_ramp(dwg, cfg, x0=12, y0=42, label="RAMP A", flow_direction="L->R")
-    draw_ramp(dwg, cfg, x0=108, y0=42, label="RAMP B", flow_direction="R->L")
+    # Locked layout profile from manual readability iteration:
+    # Ramp A top-left, Ramp B lower-right to preserve callout breathing room.
+    dwg.add(dwg.text("RAMP A: L → R (HIGH side at back tab)", insert=(22.4, 27.7), **TEXT_STYLE))
+    draw_ramp(dwg, cfg, x0=12.0, y0=41.56, label="RAMP A", flow_direction="L->R", callout_scale=0.8)
+
+    dwg.add(dwg.text("RAMP B: R ← L (HIGH side at back tab)", insert=(114.8, 142.5), **TEXT_STYLE))
+    draw_ramp(dwg, cfg, x0=104.89, y0=155.68, label="RAMP B", flow_direction="R->L", callout_scale=0.8)
     add_common(dwg)
     dwg.save()
     return output
 
 
 def draw_sheet_04_ramp_c(cfg: SpecConfig) -> Path:
-    output = get_svg_output_path(cfg, "sheet_04_ramp_c.svg")
+    output = get_svg_output_path("sheet_04_ramp_c.svg")
     dwg = create_drawing(output, "Sheet 04 - Ramp C")
     dwg.add(dwg.text("v003 — RAMP C", insert=(10, 14), font_size="5px", font_family="Arial", font_weight="bold", fill="black"))
     dwg.add(dwg.text(
         f"Pitch p={int(cfg.tread)}mm  rise h={cfg.rise:.1f}mm  modules={cfg.modules}  wall={int(cfg.side_wall_h)}mm  See Sheet 06 for full instructions.",
         insert=(10, 20), **TEXT_STYLE,
     ))
-    dwg.add(dwg.text("RAMP C:  L → R (toward exit — HIGH side at back tab)", insert=(10, 27), **TEXT_STYLE))
-    # Centered on A4 usable area: usable_w = 190mm, ramp total_w = tab+body+tab = 10+65+10 = 85mm → x_centre = 10 + (190-85)/2 = 62.5
-    draw_ramp(dwg, cfg, x0=62, y0=45, label="RAMP C", flow_direction="L->R")
+    # Locked placement from manual readability iteration.
+    dwg.add(dwg.text("RAMP C: L → R (toward exit — HIGH side at back tab)", insert=(57.94, 57.60), **TEXT_STYLE))
+    draw_ramp(dwg, cfg, x0=57.57, y0=72.04, label="RAMP C", flow_direction="L->R", callout_scale=0.8)
     add_common(dwg)
     dwg.save()
     return output
 
 
 def draw_sheet_06_instructions(cfg: SpecConfig) -> Path:
-    """Dedicated instruction sheet for ramp folding and assembly. All textual guidance lives here."""
-    output = get_svg_output_path(cfg, "sheet_06_instructions.svg")
+    """Dedicated instruction sheet for ramp folding and assembly, optimized for print readability."""
+    output = get_svg_output_path("sheet_06_instructions.svg")
     dwg = create_drawing(output, "Sheet 06 - Assembly Instructions")
 
-    # ── Header ──────────────────────────────────────────────────────────────────
-    dwg.add(dwg.text("NECROMANCER DICE TOWER — RAMP ASSEMBLY GUIDE",
-                     insert=(10, 14), font_size="6px", font_family="Arial",
-                     font_weight="bold", fill="black"))
-    dwg.add(dwg.text("Print at 100% on 200–300 gsm cardstock. Use a bone folder or butter knife to score ALL fold lines before folding.",
-                     insert=(10, 21), **TEXT_STYLE))
+    body_font = "3.0px"
+    heading_font = "4.6px"
+    line_h = 3.8
+    box_x = 10
+    box_w = 190
 
-    # ── Section A: HOW TO FOLD A RAMP (1-2-3 steps) ────────────────────────────
-    sx, sy = 10, 30
-    dwg.add(dwg.text("A — HOW TO FOLD A RAMP (applies to RAMP A, B and C)",
-                     insert=(sx, sy), font_size="5px", font_family="Arial",
-                     font_weight="bold", fill="#222222"))
+    def add_box(y: float, h: float) -> None:
+        dwg.add(dwg.rect(insert=(box_x, y), size=(box_w, h), fill="none", stroke="#cccccc", stroke_width=0.4))
 
-    w_step = 58.0  # diagram width per stage
-    gap = 8.0
+    # Header (wrapped)
+    dwg.add(dwg.text("NECROMANCER DICE TOWER — RAMP ASSEMBLY GUIDE", insert=(10, 14), font_size=heading_font, font_family="Arial", font_weight="bold", fill="black"))
+    draw_wrapped_text(
+        dwg,
+        text="Print at 100% on 200–300 gsm cardstock. Score all fold lines before folding.",
+        x=10,
+        y=20,
+        max_chars=92,
+        line_height=line_h,
+        font_size=body_font,
+    )
 
-    def stage_label(x, y_top, number, title, color="black"):
-        dwg.add(dwg.text(f"{number}.", insert=(x, y_top), font_size="6px", font_family="Arial",
-                         font_weight="bold", fill=color))
-        dwg.add(dwg.text(title, insert=(x + 7, y_top), font_size="5px", font_family="Arial",
-                         font_weight="bold", fill=color))
-
-    # Stage 1 – Flat net
-    s1x, s1y = sx, sy + 10
-    stage_label(s1x, s1y - 2, "1", "CUT OUT FLAT")
-    dwg.add(dwg.rect(insert=(s1x, s1y), size=(w_step, 40), fill="white",
-                     stroke="black", stroke_width=1))
-    # Simulate step fold lines inside the flat rectangle
-    _tread_d = 40 / 6  # simplified for diagram only
-    for _i in range(1, 6):
-        _ly = s1y + _i * _tread_d
-        _style = VALLEY_STYLE if _i % 2 else MOUNTAIN_STYLE
-        dwg.add(dwg.line(start=(s1x, _ly), end=(s1x + w_step, _ly), **_style))
-    # Side wall inner lines
-    dwg.add(dwg.line(start=(s1x + 5, s1y), end=(s1x + 5, s1y + 40), **VALLEY_STYLE))
-    dwg.add(dwg.line(start=(s1x + w_step - 5, s1y), end=(s1x + w_step - 5, s1y + 40), **VALLEY_STYLE))
-    # Notch triangles hint
-    for _i in range(1, 6):
-        _ly = s1y + _i * _tread_d
-        dwg.add(dwg.polygon(points=[(s1x, _ly), (s1x + 5, _ly), (s1x, _ly + 5 * _tread_d / 6)],
-                            fill=NOTCH_FILL, stroke="black", stroke_width=0.3))
-        dwg.add(dwg.polygon(points=[(s1x + w_step - 5, _ly), (s1x + w_step, _ly),
-                                    (s1x + w_step, _ly + 5 * _tread_d / 6)],
-                            fill=NOTCH_FILL, stroke="black", stroke_width=0.3))
-    dwg.add(dwg.text("All fold lines printed.", insert=(s1x, s1y + 46), **TEXT_STYLE))
-    dwg.add(dwg.text("ORANGE = notch to cut.", insert=(s1x, s1y + 50), font_size="3.6px",
-                     font_family="Arial", fill=NOTCH_FILL, font_weight="bold"))
-
-    # Arrow 1→2
-    ax1 = s1x + w_step + 2
-    dwg.add(dwg.line(start=(ax1, s1y + 20), end=(ax1 + gap - 1, s1y + 20),
-                     stroke="black", stroke_width=1))
-    dwg.add(dwg.polygon(points=[(ax1 + gap, s1y + 20), (ax1 + gap - 3, s1y + 18),
-                                (ax1 + gap - 3, s1y + 22)], fill="black"))
-
-    # Stage 2 – Score & Cut notches
-    s2x = s1x + w_step + gap + 2
-    stage_label(s2x, s1y - 2, "2", "SCORE + CUT NOTCHES")
-    dwg.add(dwg.rect(insert=(s2x, s1y), size=(w_step, 40), fill="white",
-                     stroke="black", stroke_width=1))
-    for _i in range(1, 6):
-        _ly = s1y + _i * _tread_d
-        _style = VALLEY_STYLE if _i % 2 else MOUNTAIN_STYLE
-        dwg.add(dwg.line(start=(s2x, _ly), end=(s2x + w_step, _ly), **_style))
-    # Notches now shown as white (cut away)
-    for _i in range(1, 6):
-        _ly = s1y + _i * _tread_d
-        dwg.add(dwg.polygon(points=[(s2x, _ly), (s2x + 5, _ly), (s2x, _ly + 5 * _tread_d / 6)],
-                            fill="white", stroke="black", stroke_width=0.5,
-                            stroke_dasharray="1,1"))
-        dwg.add(dwg.polygon(points=[(s2x + w_step - 5, _ly), (s2x + w_step, _ly),
-                                    (s2x + w_step, _ly + 5 * _tread_d / 6)],
-                            fill="white", stroke="black", stroke_width=0.5,
-                            stroke_dasharray="1,1"))
-    dwg.add(dwg.text("Score BLUE + RED lines.", insert=(s2x, s1y + 46), **TEXT_STYLE))
-    dwg.add(dwg.text("Cut & remove ORANGE triangles.", insert=(s2x, s1y + 50), **TEXT_STYLE))
-
-    # Arrow 2→3
-    ax2 = s2x + w_step + 2
-    dwg.add(dwg.line(start=(ax2, s1y + 20), end=(ax2 + gap - 1, s1y + 20),
-                     stroke="black", stroke_width=1))
-    dwg.add(dwg.polygon(points=[(ax2 + gap, s1y + 20), (ax2 + gap - 3, s1y + 18),
-                                (ax2 + gap - 3, s1y + 22)], fill="black"))
-
-    # Stage 3 – Fold steps
-    s3x = s2x + w_step + gap + 2
-    stage_label(s3x, s1y - 2, "3", "FOLD STEPS")
-    # Show a stepped zig-zag as folded profile (side view)
-    pts_top = []
-    pts_bot = []
-    _step_w = w_step / 6
-    for _i in range(7):
-        _ox = s3x + _i * _step_w
-        _oy_top = s1y + (_i % 2) * 8
-        _oy_bot = _oy_top + 15
-        pts_top.append((_ox, _oy_top))
-        pts_bot.append((_ox, _oy_bot))
-    dwg.add(dwg.polyline(points=pts_top, stroke="black", stroke_width=1.2, fill="none"))
-    dwg.add(dwg.polyline(points=pts_bot, stroke="black", stroke_width=1.2, fill="none"))
-    for _i in range(7):
-        dwg.add(dwg.line(start=pts_top[_i], end=pts_bot[_i], stroke="black", stroke_width=0.8))
-    dwg.add(dwg.text("Result: stepped profile", insert=(s3x, s1y + 46), **TEXT_STYLE))
-    dwg.add(dwg.text("side walls stand vertical.", insert=(s3x, s1y + 50), **TEXT_STYLE))
-
-    # Arrow 3→4
-    ax3 = s3x + w_step + 2
-    dwg.add(dwg.line(start=(ax3, s1y + 20), end=(ax3 + gap - 1, s1y + 20),
-                     stroke="black", stroke_width=1))
-    dwg.add(dwg.polygon(points=[(ax3 + gap, s1y + 20), (ax3 + gap - 3, s1y + 18),
-                                (ax3 + gap - 3, s1y + 22)], fill="black"))
-
-    # Stage 4 – Glue into tower
-    s4x = s3x + w_step + gap + 2
-    stage_label(s4x, s1y - 2, "4", "GLUE INTO TOWER")
-    # Simple box = tower, ramp inserted
-    dwg.add(dwg.rect(insert=(s4x + 5, s1y + 2), size=(w_step - 10, 36),
-                     fill="none", stroke="black", stroke_width=1))
-    dwg.add(dwg.polyline(
-        points=[(s4x + 8, s1y + 5), (s4x + 18, s1y + 13), (s4x + 28, s1y + 5),
-                (s4x + 38, s1y + 13)],
-        stroke="black", stroke_width=1.2, fill="none"))
-    dwg.add(dwg.rect(insert=(s4x + 5, s1y + 2), size=(3, 36), fill=GLUE_TAB_FILL, stroke="none"))
-    dwg.add(dwg.rect(insert=(s4x + w_step - 18, s1y + 2), size=(3, 36), fill=GLUE_TAB_FILL, stroke="none"))
-    dwg.add(dwg.text("Gray side tabs glue", insert=(s4x, s1y + 46), **TEXT_STYLE))
-    dwg.add(dwg.text("to tower SIDE WALLS.", insert=(s4x, s1y + 50), **TEXT_STYLE))
-
-    # ── Section B: 45° NOTCH EXPLANATION ───────────────────────────────────────
-    bx, by = 10, 100
-    dwg.add(dwg.text("B — WHY THE ORANGE NOTCH CUTS",
-                     insert=(bx, by), font_size="5px", font_family="Arial",
-                     font_weight="bold", fill="#222222"))
-    dwg.add(dwg.text(
-        "At each step fold, the side-wall strip must bend 90°. Without removing the orange triangle,",
-        insert=(bx, by + 7), **TEXT_STYLE))
-    dwg.add(dwg.text(
-        "excess paper bunches at the inner corner and prevents the fold from lying flat.",
-        insert=(bx, by + 12), **TEXT_STYLE))
-
-    # Before/after diagrams
-    nx1, ny1 = bx + 5, by + 20
-    dwg.add(dwg.text("WITHOUT notch (wrong):", insert=(nx1, ny1 - 2), **TEXT_STYLE))
-    dwg.add(dwg.rect(insert=(nx1, ny1), size=(30, 8), fill="white", stroke="black", stroke_width=0.7))
-    dwg.add(dwg.rect(insert=(nx1, ny1 + 8), size=(30, 14), fill="white", stroke="black", stroke_width=0.7))
-    # Bunch indicator
-    dwg.add(dwg.polygon(points=[(nx1, ny1 + 8), (nx1 + 6, ny1 + 8), (nx1, ny1 + 14)],
-                        fill="#ffaaaa", stroke="red", stroke_width=0.5))
-    dwg.add(dwg.text("← paper bunches here", insert=(nx1 + 31, ny1 + 12), **TEXT_STYLE))
-
-    nx2, ny2 = bx + 100, by + 20
-    dwg.add(dwg.text("WITH notch (correct):", insert=(nx2, ny2 - 2), **TEXT_STYLE))
-    dwg.add(dwg.rect(insert=(nx2, ny2), size=(30, 8), fill="white", stroke="black", stroke_width=0.7))
-    dwg.add(dwg.rect(insert=(nx2, ny2 + 8), size=(30, 14), fill="white", stroke="black", stroke_width=0.7))
-    # Gap where notch was cut
-    dwg.add(dwg.polygon(points=[(nx2, ny2 + 8), (nx2 + 5, ny2 + 8), (nx2, ny2 + 13)],
-                        fill="white", stroke="black", stroke_width=0.4, stroke_dasharray="1,1"))
-    dwg.add(dwg.text("← clean corner", insert=(nx2 + 31, ny2 + 12), **TEXT_STYLE))
-
-    # ── Section C: ASSEMBLY ORDER (full width, stacked) ───────────────────────
-    cx, cy = 10, 152
-    dwg.add(dwg.text("C — OVERALL ASSEMBLY ORDER",
-                     insert=(cx, cy), font_size="5px", font_family="Arial",
-                     font_weight="bold", fill="#222222"))
-    steps = [
-        "1. Print all sheets at 100% — do NOT scale to fit.",
-        "2. SCORE all blue dashed (valley) and red dotted (mountain) fold lines BEFORE cutting.",
-        "3. CUT all solid black lines. Remove orange notch triangles on each ramp.",
-        "4. BASE TRAY (Sheet 05): fold F1–F4 valley, F5 mountain, glue corner tabs.",
-        "5. BODY A (Sheet 01): fold panels — front + left side.",
-        "6. BODY B (Sheet 02): fold panels — back + right side. Glue A+B together.",
-        "7. Pre-fold RAMP C (lowest), dry-fit, glue onto anchor marks C-L / C-R.",
-        "8. Pre-fold RAMP B, dry-fit on B-L / B-R. Verify HIGH/LOW orientation.",
-        "9. Pre-fold RAMP A, dry-fit on A-L / A-R. Verify flow direction.",
-        "10. Glue one side-tab first; verify ramp lays flat; then glue opposite tab.",
-        "11. Attach base tray. Drop test with d6 to verify free passage.",
+    # Section A
+    a_y = 32
+    a_h = 52
+    add_box(a_y, a_h)
+    dwg.add(dwg.text("A — HOW TO FOLD A RAMP", insert=(12, a_y + 7), font_size=heading_font, font_family="Arial", font_weight="bold", fill="#222222"))
+    a_lines = [
+        "1) CUT the ramp on black solid lines.",
+        "2) SCORE all BLUE dashed and RED dotted lines.",
+        "3) CUT & REMOVE all ORANGE notch triangles before folding.",
+        "4) FOLD in sequence: valley and mountain lines, then glue side tabs to walls.",
     ]
-    _line_h = 5.0
-    for _k, _s in enumerate(steps):
-        dwg.add(dwg.text(_s, insert=(cx + 2, cy + 7 + _k * _line_h), **TEXT_STYLE))
+    a_text = " ".join(a_lines)
+    draw_wrapped_text(dwg, a_text, 12, a_y + 14, max_chars=92, line_height=line_h, font_size=body_font)
 
-    # ── Section D: MATERIAL TIPS (stacked below C) ────────────────────────────
-    _c_bottom = cy + 7 + len(steps) * _line_h
-    dx, dy = 10, _c_bottom + 7
-    dwg.add(dwg.line(start=(dx, dy - 3), end=(190, dy - 3),
-                     stroke="#cccccc", stroke_width=0.4))
-    dwg.add(dwg.text("D — MATERIALS & TOOLS",
-                     insert=(dx, dy), font_size="5px", font_family="Arial",
-                     font_weight="bold", fill="#222222"))
-    # Two-column layout for tips (each column ~90mm wide, ~55 chars safe)
-    tips_col1 = [
-        "• Cardstock: 200–250 gsm recommended (300 gsm possible).",
-        "• Score with bone folder, blunt scissors back, or empty ballpoint.",
-        "• Cut with craft knife + metal ruler on cutting mat.",
-    ]
-    tips_col2 = [
-        "• Glue: PVA or glue stick. Thin bead; hold 30 s.",
-        "• Do NOT use hot glue — sets before alignment.",
-        "• Scissors only for gentle curves, not fold lines.",
-    ]
-    for _k, _s in enumerate(tips_col1):
-        dwg.add(dwg.text(_s, insert=(dx + 2, dy + 7 + _k * _line_h), **TEXT_STYLE))
-    for _k, _s in enumerate(tips_col2):
-        dwg.add(dwg.text(_s, insert=(dx + 97, dy + 7 + _k * _line_h), **TEXT_STYLE))
+    # Section B
+    b_y = 88
+    b_h = 38
+    add_box(b_y, b_h)
+    dwg.add(dwg.text("B — WHY NOTCHES ARE REQUIRED", insert=(12, b_y + 7), font_size=heading_font, font_family="Arial", font_weight="bold", fill="#222222"))
+    draw_wrapped_text(
+        dwg,
+        text="At each step fold, side-wall strips must bend cleanly to 90°. Without removing the notch triangles, paper bunches at the inner corner and the ramp cannot lie flat.",
+        x=12,
+        y=b_y + 14,
+        max_chars=92,
+        line_height=line_h,
+        font_size=body_font,
+    )
 
-    add_common(dwg)
+    # Section C
+    c_y = 130
+    c_h = 86
+    add_box(c_y, c_h)
+    dwg.add(dwg.text("C — OVERALL ASSEMBLY ORDER", insert=(12, c_y + 7), font_size=heading_font, font_family="Arial", font_weight="bold", fill="#222222"))
+    c_steps = [
+        "1) Print all sheets at 100% (no fit-to-page).",
+        "2) Score all fold lines before cutting.",
+        "3) Cut black lines and remove all orange notches on ramps.",
+        "4) Assemble base tray (Sheet 05): F1-F4 valley, F5 mountain, glue corners.",
+        "5) Assemble body A + body B (Sheets 01-02).",
+        "6) Pre-fold and glue ramps C, then B, then A on matching anchors.",
+        "7) Attach base tray and run a d6 drop test.",
+    ]
+    draw_wrapped_text(dwg, " ".join(c_steps), 12, c_y + 14, max_chars=92, line_height=line_h, font_size=body_font)
+
+    # Section D
+    d_y = 220
+    d_h = 30
+    add_box(d_y, d_h)
+    dwg.add(dwg.text("D — MATERIALS & TOOLS", insert=(12, d_y + 7), font_size=heading_font, font_family="Arial", font_weight="bold", fill="#222222"))
+    d_lines = [
+        "• Cardstock: 200-250 gsm recommended.",
+        "• Glue: PVA or glue stick (thin bead).",
+        "• Tools: bone folder, craft knife + metal ruler, scissors for small trims.",
+        "• Avoid hot glue for alignment-sensitive joints.",
+    ]
+    draw_wrapped_text(dwg, " ".join(d_lines), 12, d_y + 14, max_chars=92, line_height=line_h, font_size=body_font)
+
+    # Reduced legend + fixed scale square
+    add_legend(dwg, y=260, scale=0.58)
+    add_scale_square(dwg)
     dwg.save()
     return output
 
 
 def draw_sheet_05_base_tray(cfg: SpecConfig) -> Path:
-    output = get_svg_output_path(cfg, "sheet_05_base_tray.svg")
+    output = get_svg_output_path("sheet_05_base_tray.svg")
     dwg = create_drawing(output, "Sheet 05 - Base Tray")
-    x0, y0 = 45, 95
+    # Locked readability layout (manual iteration): shift tray cluster right/up for clearer top text band.
+    x0, y0 = 62.2, 79.0
     floor_w = min(cfg.tray_floor_w, cfg.tray_floor_h)
     floor_h = max(cfg.tray_floor_w, cfg.tray_floor_h)
     wall_h = cfg.tray_wall_h
@@ -958,7 +979,7 @@ def draw_sheet_05_base_tray(cfg: SpecConfig) -> Path:
 
     # Labels and short instructions
     dwg.add(dwg.text("I - TRAY FLOOR", insert=(x0 + floor_w / 2 - 18, y0 + floor_h / 2), **TEXT_STYLE))
-    dwg.add(dwg.text("L - FRONT LIP (LOW)", insert=(x0 + floor_w / 2 - 19, y0 - 3), **TEXT_STYLE))
+    dwg.add(dwg.text("L - FRONT LIP (LOW)", insert=(x0 + floor_w / 2 - 19, y0 - 3), font_size="2.88px", font_family="Arial", fill="black"))
     dwg.add(dwg.text("K - BACK WALL", insert=(x0 + floor_w / 2 - 20, y0 + floor_h + 14), **TEXT_STYLE))
     dwg.add(
         dwg.text(
@@ -980,7 +1001,9 @@ def draw_sheet_05_base_tray(cfg: SpecConfig) -> Path:
         dwg.text(
             "GLUE FLAP (TO REAR / COLLAR ZONE)",
             insert=(x0 + (floor_w - flap_w) / 2 + 12, y0 + floor_h + wall_h + 12),
-            **TEXT_STYLE,
+            font_size="2.88px",
+            font_family="Arial",
+            fill="black",
         )
     )
 
@@ -992,8 +1015,9 @@ def draw_sheet_05_base_tray(cfg: SpecConfig) -> Path:
     dwg.add(dwg.text("5) Keep FRONT LIP toward dice exit side.", insert=(10, 58), **TEXT_STYLE))
     dwg.add(dwg.text("6) BLACK SOLID lines = CUT ONLY.", insert=(10, 64), **TEXT_STYLE))
 
-    dwg.add(dwg.text("NOTE: If BLUE touches BLACK edge, treat it as FOLD line.", insert=(10, 258), **TEXT_STYLE))
-    add_common(dwg)
+    add_bottom_note(dwg, y=252.3, scale=0.8)
+    add_legend(dwg, scale=0.8)
+    add_scale_square(dwg)
     dwg.save()
     return output
 

@@ -1,4 +1,4 @@
-# Export all SVG files (Standard and Beginner modes) to PDF
+# Export all standard SVG files to PDF
 $svgDir = "D:\repos\NecromancerDiceTower\01_Technical_Template\svg"
 $pdfDir = "D:\repos\NecromancerDiceTower\01_Technical_Template\pdf"
 
@@ -7,15 +7,10 @@ $svgFiles = @(
     "sheet_02_body_b.svg", 
     "sheet_03_ramps_ab.svg",
     "sheet_04_ramp_c.svg",
-    "sheet_05_base_tray.svg",
-    "sheet_01_body_a_beginner.svg",
-    "sheet_02_body_b_beginner.svg",
-    "sheet_03_ramps_ab_beginner.svg",
-    "sheet_04_ramp_c_beginner.svg",
-    "sheet_05_base_tray_beginner.svg"
+    "sheet_05_base_tray.svg"
 )
 
-Write-Host "Exporting all SVG files (Standard and Beginner modes) to PDF..."
+Write-Host "Exporting all standard SVG files to PDF..."
 Write-Host ""
 
 foreach ($svgFile in $svgFiles) {

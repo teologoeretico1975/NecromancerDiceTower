@@ -1,5 +1,64 @@
 # Changelog
 
+## 2026-05-23 (Session 7 — Sheet 06 Font Unit Fix)
+
+### Fixed
+
+- Corrected Sheet 06 text sizing bug caused by oversized `pt` units by switching to compact SVG px sizing in [01_Technical_Template/svg/sheet_06_instructions.svg](01_Technical_Template/svg/sheet_06_instructions.svg).
+- Kept explicit wrapping for all A/B/C/D sections and tuned wrap density to prevent clipping/overlap in print layout.
+- Reduced Sheet 06 legend scale further while preserving the 20 × 20 mm scale check square.
+
+## 2026-05-23 (Session 6 — Sheet 06 Readability Refactor)
+
+### Fixed
+
+- Reworked [01_Technical_Template/svg/sheet_06_instructions.svg](01_Technical_Template/svg/sheet_06_instructions.svg) into a strict single-column layout to keep all content inside the A4 printable area.
+- Removed the wide multi-stage horizontal Section A block that exceeded page bounds and replaced it with boxed, wrapped instructions.
+- Replaced mixed free-position text blocks with explicit wrapped text boxes for Sections A/B/C/D to prevent overlaps (especially in Section D).
+
+### Updated
+
+- Applied `10pt` typography for Sheet 06 instructional text and headings for consistent readability.
+- Reduced Sheet 06 legend scale and kept the 20 × 20 mm calibration square unchanged.
+
+## 2026-05-23 (Session 5 — Final Text Centering + Sheet 05 Bottom Block Fit)
+
+### Refined
+
+- Applied optical centering for main panel labels on body sheets:
+  - `FRONT` / `LEFT SIDE` on [01_Technical_Template/svg/sheet_01_body_a.svg](01_Technical_Template/svg/sheet_01_body_a.svg)
+  - `BACK` / `RIGHT SIDE` on [01_Technical_Template/svg/sheet_02_body_b.svg](01_Technical_Template/svg/sheet_02_body_b.svg)
+- Centering is now generated from panel width rather than fixed text offsets, reducing visual drift if dimensions change.
+
+### Fixed
+
+- Reduced Sheet 05 bottom annotation block to 80% scale to prevent residual crowding near the tray rear flap zone:
+  - bottom `NOTE` now rendered at reduced scale
+  - `LEGEND` block now rendered at reduced scale
+  - scale check square remains unchanged for print validation
+  - affected file: [01_Technical_Template/svg/sheet_05_base_tray.svg](01_Technical_Template/svg/sheet_05_base_tray.svg)
+
+## 2026-05-23 (Session 4 — Sheet 01/02 Note Consolidation)
+
+### Fixed
+
+- Resolved residual note/legend overlap risk on body sheets by increasing vertical clearance:
+  - [01_Technical_Template/svg/sheet_01_body_a.svg](01_Technical_Template/svg/sheet_01_body_a.svg)
+  - [01_Technical_Template/svg/sheet_02_body_b.svg](01_Technical_Template/svg/sheet_02_body_b.svg)
+
+### Consolidated
+
+- Centralized NOTE rendering in generator via shared helper and constants:
+  - `BOTTOM_NOTE_TEXT`
+  - `BOTTOM_NOTE_Y`
+  - `add_bottom_note(...)`
+- This prevents future drift and keeps Sheet 01/02 note placement consistent.
+
+### Micro-adjustments
+
+- Final note baseline tuned to `y=251.8` on Sheet 01/02 for cleaner separation from `LEGEND`.
+- Sheet 05 keeps its locked/manual profile note baseline at `y=252.3`.
+
 ## 2026-05-22 (Session 3 — UX Fixes)
 
 ### Fixed (Critical UX Issues)
