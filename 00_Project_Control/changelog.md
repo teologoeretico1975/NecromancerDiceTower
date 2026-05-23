@@ -1,5 +1,27 @@
 # Changelog
 
+## 2026-05-23 (Session 11 — Repository Cleanup)
+
+### Removed
+
+- Deleted obsolete dual-mode guide: `00_Project_Control/DUAL_MODE_GUIDE.md`.
+- Deleted obsolete export script: `scripts/export_all_svg_to_pdf_dual_mode.ps1`.
+
+### Cleaned
+
+- Removed stale references to deleted dual-mode guide in:
+  - [01_Technical_Template/specs/technical_spec_v001.md](01_Technical_Template/specs/technical_spec_v001.md)
+  - [01_Technical_Template/specs/technical_spec_v002_ramps.md](01_Technical_Template/specs/technical_spec_v002_ramps.md)
+- Updated repository overview in [README.md](README.md) to reflect current v004 + 7-sheet baseline.
+
+### Updated
+
+- Updated [scripts/export_all_technical_pdfs.ps1](scripts/export_all_technical_pdfs.ps1) to export all active technical sheets (`sheet_01`..`sheet_07`).
+
+### Validation
+
+- Full export script executed successfully for all 7 active SVG sheets.
+
 ## 2026-05-23 (Session 10 — Sheet 07 Isometric + Prompt Workflow)
 
 ### Added
@@ -68,7 +90,7 @@
 
 - Deleted (beginner mode files): 5 `_beginner.svg` files + 5 `_beginner.pdf` files.
 - Modified: [agent_02b_svg_generator.py](agent_02b_svg_generator.py), [generate_dual_output.py](generate_dual_output.py), all 6 sheet SVG files.
-- Scripts: Updated [scripts/export_all_svg_to_pdf_dual_mode.ps1](scripts/export_all_svg_to_pdf_dual_mode.ps1) (removed beginner file references).
+- Scripts: Updated `scripts/export_all_svg_to_pdf_dual_mode.ps1` (legacy script removed in later cleanup).
 
 ### Validation
 

@@ -25,7 +25,7 @@ As of 2026-05-22, this specification is available in **two output modes**:
   - 5 SVG sheets + 5 PDF sheets
   - Primary difference: Sheets 03/04 ramp layouts reorganized for clarity (see §2.1 for details)
 
-Refer to `DUAL_MODE_GUIDE.md` for complete output guide and usage recommendations.
+Dual-mode output notes in this document are retained for historical traceability; active generation follows the current single technical workflow.
 
 > Notes:
 > - This product is designed for manual papercraft assembly only.

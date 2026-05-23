@@ -40,7 +40,7 @@ All v002 ramp sheets are now available in **two variants**:
 - Beginner mode ramps grouped for cognitive clarity: follow 1-2-3 guide once, apply to all 3 ramps
 - Standard mode unchanged for experienced users
 
-Refer to `DUAL_MODE_GUIDE.md` in the project control folder for complete mode guide and usage recommendations.
+Note: dual-mode guidance in this addendum is historical; active technical workflow is now maintained in current single-mode templates/specs.
 
 ---
 
