@@ -9,6 +9,7 @@ from agent_02b_svg_generator import (
     draw_sheet_03_ramps_ab,
     draw_sheet_04_ramp_c,
     draw_sheet_05_base_tray,
+    draw_sheet_06_instructions,
     SVG_DIR,
 )
 
@@ -24,6 +25,7 @@ def generate_all_modes():
         ("Sheet 03 (Ramps A/B)", draw_sheet_03_ramps_ab),
         ("Sheet 04 (Ramp C)", draw_sheet_04_ramp_c),
         ("Sheet 05 (Base Tray)", draw_sheet_05_base_tray),
+        ("Sheet 06 (Instructions)", draw_sheet_06_instructions),
     ]
 
     # First: Generate standard (default) mode
