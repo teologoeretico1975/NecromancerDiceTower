@@ -6,7 +6,8 @@
   "markdown.preview.breaks": true,
   "markdown.preview.fontSize": 15,
   "workbench.editorAssociations": {
-    "*.pdf": "default"
+    "*.pdf": "pdf.preview",
+    "*.copilotmd": "vscode.markdown.preview.editor"
   },
   "explorer.compactFolders": false,
   "files.exclude": {

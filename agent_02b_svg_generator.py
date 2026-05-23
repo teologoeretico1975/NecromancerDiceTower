@@ -847,7 +847,7 @@ def draw_sheet_06_instructions(cfg: SpecConfig) -> Path:
                         fill="white", stroke="black", stroke_width=0.4, stroke_dasharray="1,1"))
     dwg.add(dwg.text("← clean corner", insert=(nx2 + 31, ny2 + 12), **TEXT_STYLE))
 
-    # ── Section C: ASSEMBLY ORDER ──────────────────────────────────────────────
+    # ── Section C: ASSEMBLY ORDER (left column) ───────────────────────────────
     cx, cy = 10, 155
     dwg.add(dwg.text("C — OVERALL ASSEMBLY ORDER",
                      insert=(cx, cy), font_size="5px", font_family="Arial",
@@ -866,22 +866,29 @@ def draw_sheet_06_instructions(cfg: SpecConfig) -> Path:
         "11.Attach base tray.  Drop test with d6 from the top to verify free passage.",
     ]
     for _k, _s in enumerate(steps):
-        dwg.add(dwg.text(_s, insert=(cx + 2, cy + 8 + _k * 7), **TEXT_STYLE))
+        dwg.add(dwg.text(_s, insert=(cx + 2, cy + 8 + _k * 6), **TEXT_STYLE))
 
-    # ── Section D: MATERIAL TIPS ───────────────────────────────────────────────
-    dx, dy = 10, 240
+    # ── Section D: MATERIAL TIPS (right column, same start y as C) ────────────
+    dx, dy = 108, 155
+    # Vertical separator
+    dwg.add(dwg.line(start=(dx - 3, dy - 5), end=(dx - 3, dy + 75),
+                     stroke="#cccccc", stroke_width=0.5))
     dwg.add(dwg.text("D — MATERIALS & TOOLS",
                      insert=(dx, dy), font_size="5px", font_family="Arial",
                      font_weight="bold", fill="#222222"))
     tips = [
-        "Cardstock: 200–250 gsm recommended.  300 gsm possible but harder to fold ramp steps.",
-        "Scoring tool: bone folder, blunt back of scissors, or empty ballpoint pen.",
-        "Cutting: craft knife + metal ruler on cutting mat.  Scissors for gentle curves only.",
-        "Glue: PVA (white craft glue) or glue stick.  Apply thin bead; hold 30 s with finger.",
-        "Do NOT use hot glue — it sets too fast before alignment is correct.",
+        "Cardstock: 200–250 gsm recommended.",
+        "300 gsm possible but harder to fold ramp steps.",
+        "Scoring tool: bone folder, blunt scissors back,",
+        "  or empty ballpoint pen.",
+        "Cutting: craft knife + metal ruler on cutting mat.",
+        "  Scissors for gentle curves only.",
+        "Glue: PVA (white craft glue) or glue stick.",
+        "  Apply thin bead; hold 30 s with finger.",
+        "Do NOT use hot glue — sets before alignment.",
     ]
     for _k, _s in enumerate(tips):
-        dwg.add(dwg.text(f"• {_s}", insert=(dx + 2, dy + 8 + _k * 7), **TEXT_STYLE))
+        dwg.add(dwg.text(f"{_s}", insert=(dx + 2, dy + 8 + _k * 6), **TEXT_STYLE))
 
     add_common(dwg)
     dwg.save()
