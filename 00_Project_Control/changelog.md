@@ -1,5 +1,43 @@
 # Changelog
 
+## 2026-05-23 (Session 8 — Dual-Mode Removal & Single-Mode Finalization)
+
+### Major Refactor
+
+- **Removed dual-mode complexity**: Eliminated `output_mode` flag and beginner/standard file generation logic from [agent_02b_svg_generator.py](agent_02b_svg_generator.py) and [generate_dual_output.py](generate_dual_output.py).
+- **Simplified path construction**: Single standard output per sheet; all previous `_beginner.svg` files deleted (5 PDFs removed as well).
+- **Single output strategy**: All future work targets single v003 standard output line.
+
+### Technical Improvements
+
+- Added reusable typography utility: `scaled_px(base_px, scale)` for dynamic font sizing in legends and callouts.
+- Refactored `add_legend()` to accept `scale` parameter (default 1.0); enables compact legends on dense sheets.
+- Introduced `draw_wrapped_text()` function for explicit word-wrapping with configurable max_chars and line_height.
+- Added `add_centered_panel_label()` for optical centering of panel identifiers (body sheets).
+- Moved anchor tick labels to rotated format (`transform="rotate..."`) to avoid collisions with fold lines.
+
+### Sheet 06 Finalization (Post-Session 7 micro-tuning)
+
+- Further reduced body font: 3.2px → 3.0px; heading font: 4.8px → 4.6px.
+- Compressed line height: 4.0px → 3.8px for tighter vertical spacing.
+- Reduced legend scale from 0.62 → 0.58 for compact footprint.
+- Legend repositioned to y=260 (consistent across all sheets with scale parameter).
+- Verified all 4 sections (A/B/C/D) fit within A4 bounds with no text overflow or overlap.
+
+### Affected Files
+
+- Deleted (beginner mode files): 5 `_beginner.svg` files + 5 `_beginner.pdf` files.
+- Modified: [agent_02b_svg_generator.py](agent_02b_svg_generator.py), [generate_dual_output.py](generate_dual_output.py), all 6 sheet SVG files.
+- Scripts: Updated [scripts/export_all_svg_to_pdf_dual_mode.ps1](scripts/export_all_svg_to_pdf_dual_mode.ps1) (removed beginner file references).
+
+### Validation
+
+- All 6 SVG sheets regenerate with zero errors ✓
+- All 6 PDF exports complete successfully ✓
+- Typography verified: 3.0px (body), 3.6px (standard), 4.6px (heading) consistent ✓
+- No pt units detected in final output ✓
+- Commit hash: d237c2c
+
 ## 2026-05-23 (Session 7 — Sheet 06 Font Unit Fix)
 
 ### Fixed

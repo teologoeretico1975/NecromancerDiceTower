@@ -1,8 +1,35 @@
 # Project State — Necromancer Dice Tower
 
 ## Current Phase
-- **Phase:** v002 + Dual-Mode Output (Revised UX)
-- **Status:** In progress (Critical UX fixes applied; Beginner mode now readable and non-overlapping)
+- **Phase:** v003 Single-Mode Refinement (Sheet 06 Readability Optimization)
+- **Status:** In progress (Sheet 06 refactored; dual-mode removed; single standard output streamlined)
+
+## Completed in Session 8 — Sheet 06 Optimization & Mode Simplification (2026-05-23)
+- **Problem**: Sheet 06 assembly instructions had critical readability issues:
+  - Section A: Title and text exceeded A4 printable area (overflowed off page)
+  - Section D: Materials & tools text overlapped due to cramped layout
+  - Font sizing mismatch: 10pt unit was invalid in SVG context, rendered ~14-16px actual
+- **Solution implemented**:
+  1. **Layout restructuring**: Converted multi-stage horizontal layout → single-column 4-box structure (A/B/C/D sections)
+  2. **Font unit correction**: Replaced invalid `10pt` → compact `3.0px` body, `4.6px` heading text
+  3. **Explicit wrapping**: Added word-wrap logic (max 92 chars per line) to eliminate overlaps
+  4. **Legend scaling**: Reduced from scale 0.72 → 0.58 to fit within reduced vertical footprint
+  5. **Micro-tuning**: Compressed line height: 4.0px → 3.8px for better density control
+- **Code improvements**:
+  - Removed dual-mode complexity (output_mode flag eliminated)
+  - Simplified path construction: single standard output per sheet
+  - Added reusable functions: `draw_wrapped_text()`, `add_legend()` with scale parameter
+  - Updated all 6 sheets: consistent 3.0/3.6/4.6px typography across entire technical suite
+- **Validation**:
+  - All 6 SVG sheets regenerated successfully ✓
+  - All PDF exports completed (exit code 0) ✓
+  - Grep verification: confirmed 3.0/4.6px sizing, no pt units detected ✓
+  - Sheet 06 text now fits within A4 bounds, no overlaps, sections align properly ✓
+- **Deliverables**:
+  - Updated SVG sheet 06 (and updated sheets 03-05 for consistency)
+  - All PDFs re-exported with new layout
+  - Changelog updated with two session entries (Session 6 & 7 notes)
+  - Commit: d237c2c (27 files changed, removed 5 beginner PDFs, updated all technical sheets)
 
 ## Completed in v002
 - Merged specification direction and implementation notes into active workflow.
@@ -25,25 +52,21 @@
   - **Reduced cognitive overload**: Removed duplicate explanation text in Beginner ramps (now centralized in fold guide)
 
 ## Validation State
-- Automated preflight: All 10 SVG files PASS ✓
-- PDF export: All 10 files generated successfully ✓
-- Visual inspection: No text overlaps, clear readability on A4 100% print ✓
-- Beginner mode usability: Improved from ~6.5/10 (previous with cramped diagrams) → estimated 8.0-8.5/10 (with large visual guides)
+- All 6 standard SVG sheets PASS syntax validation ✓
+- PDFs: 6 technical sheets generated successfully ✓
+- Sheet 06: No text overflow, sections A-D align within A4 bounds ✓
+- Typography: Consistent 3.0px (body) / 3.6px (standard) / 4.6px (heading) sizing ✓
+- Legend: Repositioned y=260, scaled 0.58 ✓
 
-## Deliverables
-- **SVG templates** (5 Standard + 5 Beginner): all files in [01_Technical_Template/svg/](01_Technical_Template/svg/)
-- **PDF documents** (5 Standard + 5 Beginner): all files in [01_Technical_Template/pdf/](01_Technical_Template/pdf/)
-- **Documentation** ([DUAL_MODE_GUIDE.md](DUAL_MODE_GUIDE.md)): Complete guide for both modes and future enhancements
+## Deliverables (Current)
+- **SVG templates** (6 standard sheets): all files in [01_Technical_Template/svg/](01_Technical_Template/svg/)
+- **PDF documents** (6 standard sheets): all files in [01_Technical_Template/pdf/](01_Technical_Template/pdf/)
+- **Python code** (agent_02b_svg_generator.py): Single-mode output, removed dual-mode complexity
+- **Documentation**: Project state updated (this file); changelog in [changelog.md](changelog.md)
 
 ## Next Action (Pending)
-1. **Physical build test** with Beginner-mode sheets (target: 8+/10 autonomy for age 8-10 builder)
-2. **Standard mode verification** (ensure technical accuracy vs. v002 spec)
-3. **Unified Dimension Source** (optional, medium priority): Create single JSON dimension fact base
-4. **SVG Readability Enhancement** (optional, medium priority): Non-minified with section comments
+1. **Physical build test** with all 6 updated technical sheets (verify assembly clarity)
+2. **Art direction phase** — move to decorative artwork layer (motifs, color palette, branding)
+3. **PDF asset pack preparation** — organize final deliverables for Etsy listing
 
-## Known Limitations (Addressed)
-- ✓ Fold-sequence diagrams now clear and readable (was: too small and crammed)
-- ✓ Text overlap eliminated (was: 5 lines of annotations cramped at y=168)
-- ⊘ Still static visuals only (no animation/multi-frame sequences)
-- ⊘ No 3D folding instruction video links yet (planned for future)
 
